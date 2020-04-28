@@ -21,6 +21,7 @@ public class EDDProyecto2_201801229 {
     
     MetodosArbolB mab = new MetodosArbolB(3);
     MetodosAVL mavl = new MetodosAVL();
+    MetodosTablaHash tablaHash = new MetodosTablaHash(45);
     public static void main(String[] args) {
         EDDProyecto2_201801229 edd = new EDDProyecto2_201801229();
         edd.menu();
@@ -33,6 +34,10 @@ public class EDDProyecto2_201801229 {
             System.out.println("2. Mostrar Arbol B");
             System.out.println("3. Insertar Arbol AVL");
             System.out.println("4. Mostrar Arbol AVL");
+            System.out.println("5. Agregar Usuario");
+            System.out.println("6. Modificar Usuario");
+            System.out.println("7. Borrar Usuario");
+            System.out.println("8. Buscar Usuario");
             System.out.print("Su Opcion es: ");
             opcion = scan.nextInt();
             switch(opcion){
@@ -49,7 +54,7 @@ public class EDDProyecto2_201801229 {
                     mostrarAVL();
                     break;
             }
-        }while(opcion!=5);
+        }while(opcion!=9);
     }
     public void mostrarAVL(){
         mavl.imprimir();
@@ -104,15 +109,40 @@ public class EDDProyecto2_201801229 {
         carnetUsuario = scan.nextInt();
         Libro nuevo = new Libro(ISBN, carnetUsuario,  año,  autor,  titulo,  editorial,  edicion, categoria, idioma);
         AVLNode libros = mavl.buscar(categoria);
+        Usuario buscarusuario = tablaHash.Buscar(carnetUsuario);
             if (libros != null) {
-                libros.getArbolB().Insertar(nuevo);
+                if (buscarusuario!=null) {
+                    libros.getArbolB().Insertar(nuevo);
+                }else{
+                    System.out.println("El Usuario No Existe");
+                }
             }else{
                 System.out.println("Error al Insertar: categoria no existe");
             }
         }catch(Exception ex){
             System.out.println("Error al Insertar Libro: "+ex.toString());
         }
-        
-        
+    }
+    public void insertarUsuario(){
+        try{
+            int carnet=0;
+            String nombre = "", apellido = "", carrera = "", password = "";
+            Scanner scan = new Scanner(System.in);
+            System.out.print("Carnet: ");
+            carnet = scan.nextInt();
+            System.out.print("Nombre: ");
+            nombre = scan.next();
+            System.out.print("Apellido: ");
+            apellido = scan.next();
+            System.out.print("Carrera: ");
+            carrera = scan.next();
+            System.out.print("Password: ");
+            password = scan.next();
+            
+            Usuario nuevoUsurio = new Usuario(carnet, nombre, apellido, carrera, password);
+            tablaHash.insertar(nuevoUsurio);
+        }catch(Exception ex){
+            System.out.println("Error: " + ex);
+        }
     }
 }
