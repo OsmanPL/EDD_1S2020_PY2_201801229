@@ -61,4 +61,14 @@ public class ListaSimpleUsuarios {
         }
         return null;
     }
+    public Usuario ingresar(int carnetBorrar, String password){
+        Usuario aux = inicio;
+        while(aux!=null){
+            if (carnetBorrar == aux.getCarnet() && password.equals(aux.getPassword())) {
+                return aux;
+            }
+            aux = aux.getSiguiente();
+        }
+        return null;
+    }
 }

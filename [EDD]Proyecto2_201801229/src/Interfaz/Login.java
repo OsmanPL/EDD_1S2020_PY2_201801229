@@ -5,6 +5,18 @@
  */
 package Interfaz;
 
+import Clases.Usuario;
+import Metodos.LecturaArchivos;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.tablaHash;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
 /**
  *
  * @author l4kz4
@@ -50,6 +62,11 @@ public class Login extends javax.swing.JFrame {
         jPanel2.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 230, -1));
 
         jButton1.setText("Ingresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 120, 40));
         jButton1.getAccessibleContext().setAccessibleDescription("");
 
@@ -63,6 +80,11 @@ public class Login extends javax.swing.JFrame {
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 120, 40));
 
         jButton3.setLabel("Cargar Archivos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -81,7 +103,75 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        Registrarse rg = new Registrarse();
+        rg.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String aux="";
+        String texto="";
+        try
+        {
+            /**llamamos el metodo que permite cargar la ventana*/
+            JFileChooser file=new JFileChooser();
+            FileNameExtensionFilter filtro=new FileNameExtensionFilter("JSON","json");
+            file.setFileFilter(filtro);
+            file.showOpenDialog(this);
+            File abre=file.getSelectedFile();
+            
+            System.out.println(abre.getAbsolutePath());
+            
+        LecturaArchivos users = new LecturaArchivos();
+        users.leerUsuarios(abre.getAbsolutePath());
+            if(abre!=null)
+            {
+                FileReader archivos=new FileReader(abre);
+                BufferedReader lee=new BufferedReader(archivos);
+                while((aux=lee.readLine())!=null)
+                {
+                    texto+= aux+ "\n";
+                }
+                lee.close();
+            }
+        }
+        catch(IOException ex)
+        {
+            JOptionPane.showMessageDialog(null,ex+"" +
+                "\nNo se ha encontrado el archivo",
+                "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            int carnet = Integer.parseInt(jTextField1.getText());
+            String password = jPasswordField1.getText();
+            
+            Usuario buscar = tablaHash.ingresar(carnet, password);
+            if (buscar!=null) {
+                JOptionPane.showMessageDialog(null,"Usuario Existente"
+                +"\nCarnet: "+buscar.getCarnet() 
+                +"\nNombre: "+buscar.getNombre()
+                +"\nApellido: "+buscar.getApellido()
+                +"\nCarrera: "+buscar.getCarrera()
+                +"\nPassword: "+buscar.getPassword(),
+                "",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null,"El Usuario no Existe",
+                "Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,ex+"" +
+                "\nErro",
+                "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+        }
+        jTextField1.setText("");
+        jPasswordField1.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
 

@@ -27,6 +27,10 @@ public class TablaHashNode {
     public Usuario buscar(int carnet){
         return listaUsuarios.buscar(carnet);
     }
+    
+    public Usuario ingresar(int carnet, String pass){
+        return listaUsuarios.ingresar(carnet, pass);
+    }
 
     /**
      * @return the listaUsuarios

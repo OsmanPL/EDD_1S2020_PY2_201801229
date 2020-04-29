@@ -11,6 +11,9 @@ import Clases.*;
 import Estructuras.*;
 import Interfaz.*;
 import Metodos.*;
+
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.tablaHash;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
 /**
  *
  * @author l4kz4
@@ -24,10 +27,10 @@ public class EDDProyecto2_201801229 {
     public static MetodosTablaHash tablaHash = new MetodosTablaHash(45);
     LecturaArchivos ArchivoJson = new LecturaArchivos();
     public static void main(String[] args) {
-        /*Login login = new Login();
-        login.setVisible(true);*/
-        EDDProyecto2_201801229 pr = new EDDProyecto2_201801229();
-        pr.menu();
+        Login login = new Login();
+        login.setVisible(true);
+       /* EDDProyecto2_201801229 pr = new EDDProyecto2_201801229();
+        pr.menu();*/
     }
     public void menu(){
         int opcion=0;

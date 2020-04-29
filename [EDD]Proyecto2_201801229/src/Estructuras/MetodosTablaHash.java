@@ -31,6 +31,18 @@ public class MetodosTablaHash {
             tablaHash[valorHash].insertar(nuevoUsuario);
         }
     }
+    
+    public Usuario ingresar(int carnet, String password){
+        int valorHash = FuncionHash(carnet);
+        if (tablaHash[valorHash]!=null) {
+            Usuario buscarUsuario = tablaHash[valorHash].ingresar(carnet,password);
+            if (buscarUsuario!=null) {
+                return buscarUsuario;
+            }
+        }
+        return null;
+    }
+    
     public Usuario Buscar(int carnet){
         int valorHash = FuncionHash(carnet);
         if (tablaHash[valorHash]!=null) {
