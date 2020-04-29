@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 import Clases.*;
 import Estructuras.*;
+import Interfaz.*;
+import Metodos.*;
 /**
  *
  * @author l4kz4
@@ -18,13 +20,14 @@ public class EDDProyecto2_201801229 {
     /**
      * @param args the command line arguments
      */
-    
-    MetodosArbolB mab = new MetodosArbolB(3);
-    MetodosAVL mavl = new MetodosAVL();
-    MetodosTablaHash tablaHash = new MetodosTablaHash(45);
+    public static MetodosAVL mavl = new MetodosAVL();
+    public static MetodosTablaHash tablaHash = new MetodosTablaHash(45);
+    LecturaArchivos ArchivoJson = new LecturaArchivos();
     public static void main(String[] args) {
-        EDDProyecto2_201801229 edd = new EDDProyecto2_201801229();
-        edd.menu();
+        /*Login login = new Login();
+        login.setVisible(true);*/
+        EDDProyecto2_201801229 pr = new EDDProyecto2_201801229();
+        pr.menu();
     }
     public void menu(){
         int opcion=0;
@@ -38,6 +41,8 @@ public class EDDProyecto2_201801229 {
             System.out.println("6. Modificar Usuario");
             System.out.println("7. Borrar Usuario");
             System.out.println("8. Buscar Usuario");
+            System.out.println("9. Leer Archivo Usuarios");
+            System.out.println("10. Leer Archivo Libros");
             System.out.print("Su Opcion es: ");
             opcion = scan.nextInt();
             switch(opcion){
@@ -53,8 +58,26 @@ public class EDDProyecto2_201801229 {
                 case 4:
                     mostrarAVL();
                     break;
+                case 5:
+                    insertarUsuario();
+                    break;
+                case 6:
+                    modificar();
+                    break;
+                case 7:
+                    eliminarUsuario();
+                    break;
+                case 8:
+                    buscarUsuario();
+                    break;
+                case 9:
+                    leerArchivo(true);
+                    break;
+                case 10:
+                    leerArchivo(false);
+                    break;
             }
-        }while(opcion!=9);
+        }while(opcion!=11);
     }
     public void mostrarAVL(){
         mavl.imprimir();
@@ -87,8 +110,8 @@ public class EDDProyecto2_201801229 {
     public void insertarLibro(){
         try{
         Scanner scan = new Scanner(System.in);
-        int ISBN=0, carnetUsuario=0, año=2020;
-        String autor="", titulo="", editorial="", edicion="", categoria="", idioma="";
+        int ISBN=0, carnetUsuario=0, año=2020, edicion=0;
+        String autor="", titulo="", editorial="", categoria="", idioma="";
         System.out.print("ISBN: ");
         ISBN = scan.nextInt();
         System.out.print("Titulo: ");
@@ -100,7 +123,7 @@ public class EDDProyecto2_201801229 {
         System.out.print("Año: ");
         año = scan.nextInt();
         System.out.print("Edicion: ");
-        edicion = scan.next();
+        edicion = scan.nextInt();
         System.out.print("Categoria: ");
         categoria = scan.next();
         System.out.print("Idioma: ");
@@ -117,7 +140,13 @@ public class EDDProyecto2_201801229 {
                     System.out.println("El Usuario No Existe");
                 }
             }else{
-                System.out.println("Error al Insertar: categoria no existe");
+                if (buscarusuario!=null) {
+                    mavl.insert(categoria);
+                    libros = mavl.buscar(categoria);
+                    libros.getArbolB().Insertar(nuevo);
+                }else{
+                    System.out.println("El Usuario No Existe");
+                }
             }
         }catch(Exception ex){
             System.out.println("Error al Insertar Libro: "+ex.toString());
@@ -142,7 +171,79 @@ public class EDDProyecto2_201801229 {
             Usuario nuevoUsurio = new Usuario(carnet, nombre, apellido, carrera, password);
             tablaHash.insertar(nuevoUsurio);
         }catch(Exception ex){
-            System.out.println("Error: " + ex);
+            System.out.println("Error: " + ex.toString());
+        }
+    }
+    public void buscarUsuario(){
+        try{
+            int carnet=0;
+           
+            Scanner scan = new Scanner(System.in);
+            System.out.print("Bscar Usuario\nCarnet: ");
+            carnet = scan.nextInt();
+            Usuario buscar = tablaHash.Buscar(carnet);
+            if (buscar!=null) {
+                System.out.println("Carnet: "+buscar.getCarnet()
+                +"\nNombre: "+buscar.getNombre()
+                +"\nApellido: "+buscar.getApellido()
+                +"\nCarrera: "+buscar.getCarrera()
+                +"\nPassword: "+buscar.getPassword());
+            }else{
+                System.out.println("Usurio no encontrado");
+            }
+        }catch(Exception ex){
+            System.out.println("Error: " + ex.toString());
+        }
+    }
+    
+    public void eliminarUsuario(){
+        try{
+            int carnet=0;
+           
+            Scanner scan = new Scanner(System.in);
+            System.out.print("Bscar Usuario\nCarnet: ");
+            carnet = scan.nextInt();
+            boolean borrar = tablaHash.Borrar(carnet);
+            if (borrar) {
+                System.out.println("Usuario Eliminado");
+            }else{
+                System.out.println("Usuario no encontrado");
+            }
+        }catch(Exception ex){
+            System.out.println("Error: " + ex.toString());
+        }
+    }
+    public void modificar(){
+        try{
+            int carnet=0;
+            String nombre = "", apellido = "", carrera = "", password = "";
+            Scanner scan = new Scanner(System.in);
+            System.out.print("Buscar Carnet: ");
+            carnet = scan.nextInt();
+            System.out.print("Nombre: ");
+            nombre = scan.next();
+            System.out.print("Apellido: ");
+            apellido = scan.next();
+            System.out.print("Carrera: ");
+            carrera = scan.next();
+            System.out.print("Password: ");
+            password = scan.next();
+            
+            tablaHash.modificar(carnet, nombre, apellido, carrera, password);
+            
+        }catch(Exception ex){
+            System.out.println("Error: " + ex.toString());
+        }
+    }
+    
+    public void leerArchivo(boolean json){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Ruta del Archivo: ");
+        String ruta = scan.next();
+        if (json) {
+            ArchivoJson.leerUsuarios(ruta);
+        }else{
+            ArchivoJson.leerLibros(ruta);
         }
     }
 }

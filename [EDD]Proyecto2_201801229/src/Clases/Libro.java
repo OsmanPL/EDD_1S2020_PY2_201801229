@@ -9,13 +9,13 @@ package Clases;
  * @author l4kz4
  */
 public class Libro {
-    private int ISBN, carnetUsuario, año;
-    private String autor, titulo, editorial, edicion, categoria, idioma;
+    private int ISBN, carnetUsuario, año, edicion;
+    private String autor, titulo, editorial, categoria, idioma;
 
     public Libro() {
     }
 
-    public Libro(int ISBN, int carnetUsuario, int año, String autor, String titulo, String editorial, String edicion, String categoria, String idioma) {
+    public Libro(int ISBN, int carnetUsuario, int año, String autor, String titulo, String editorial, int edicion, String categoria, String idioma) {
         this.ISBN = ISBN;
         this.carnetUsuario = carnetUsuario;
         this.año = año;
@@ -114,14 +114,14 @@ public class Libro {
     /**
      * @return the edicion
      */
-    public String getEdicion() {
+    public int getEdicion() {
         return edicion;
     }
 
     /**
      * @param edicion the edicion to set
      */
-    public void setEdicion(String edicion) {
+    public void setEdicion(int edicion) {
         this.edicion = edicion;
     }
 

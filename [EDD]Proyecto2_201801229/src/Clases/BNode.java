@@ -141,7 +141,7 @@ public class BNode {
 
         if(!hoja){
             for(int k = 0; k <= orden; k++){
-                if (k < orden+1){
+                if (k < orden-2){
                     Hi.add(SubNodos.get(k));
                 }else{
                     Hd.add(SubNodos.get(k));
@@ -178,9 +178,9 @@ public class BNode {
         }else{
             int i = 0;
             while ((i< valoresNodo.size()) && (valor.getISBN() > valoresNodo.get(i).getISBN())){
-                i++;//Ciclo que valide la posición a guardar el valor.
+                i++;
             }
-            sn = SubNodos.get(i).insertar(valor);//chicharrón carnudo.
+            sn = SubNodos.get(i).insertar(valor);
             if(sn != null){
                 SubNodos.remove(i);
                 Libro val = sn.getValor();
