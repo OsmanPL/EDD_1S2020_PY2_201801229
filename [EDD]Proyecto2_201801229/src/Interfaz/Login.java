@@ -160,6 +160,9 @@ public class Login extends javax.swing.JFrame {
                 +"\nCarrera: "+buscar.getCarrera()
                 +"\nPassword: "+buscar.getPassword(),
                 "",JOptionPane.INFORMATION_MESSAGE);
+                Biblioteca biblio = new Biblioteca(buscar);
+                biblio.setVisible(true);
+                
             }else{
                 JOptionPane.showMessageDialog(null,"El Usuario no Existe",
                 "Error",JOptionPane.ERROR_MESSAGE);

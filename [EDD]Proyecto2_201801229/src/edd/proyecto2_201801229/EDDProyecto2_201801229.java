@@ -246,7 +246,7 @@ public class EDDProyecto2_201801229 {
         if (json) {
             ArchivoJson.leerUsuarios(ruta);
         }else{
-            ArchivoJson.leerLibros(ruta);
+            ArchivoJson.leerLibros(ruta, 0);
         }
     }
 }

@@ -52,7 +52,7 @@ public class LecturaArchivos {
         }
     }
     
-    public void leerLibros(String ruta){
+    public void leerLibros(String ruta, int carnet){
        // try{
             int i = 1;
             JSONParser parser = new JSONParser();
@@ -82,7 +82,7 @@ public class LecturaArchivos {
                     String categoria = (String) libro.get("Categoria");
                     
                     
-                    Libro nuevo = new Libro(ISBN, 0,  año,  autor,  titulo,  editorial,  edicion, categoria, idioma);
+                    Libro nuevo = new Libro(ISBN, carnet,  año,  autor,  titulo,  editorial,  edicion, categoria, idioma);
                     
                     AVLNode libros = mavl.buscar(categoria);
                     if (libros != null) {
