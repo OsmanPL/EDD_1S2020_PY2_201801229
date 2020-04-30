@@ -148,9 +148,19 @@ public class Biblioteca extends javax.swing.JFrame {
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 180, 40));
 
         jButton6.setText("Nuevo Libro");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 180, 40));
 
         jButton7.setText("Dar De Baja");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 180, 40));
 
         jButton8.setText("Ver Libros");
@@ -243,6 +253,17 @@ public class Biblioteca extends javax.swing.JFrame {
         }
         user();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        NuevoLibro nl = new NuevoLibro(usuarioActual);
+        nl.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
