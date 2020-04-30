@@ -75,6 +75,8 @@ public class Biblioteca extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -163,8 +165,19 @@ public class Biblioteca extends javax.swing.JFrame {
         });
         jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 180, 40));
 
-        jButton8.setText("Ver Libros");
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 180, 40));
+        jButton8.setText("Ver Mis Libros");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 180, -1));
+
+        jButton9.setText("Ver Catalogo");
+        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 180, 40));
+
+        jButton10.setText("Configuración");
+        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 180, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,9 +278,17 @@ public class Biblioteca extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        MisLibros ml = new MisLibros(usuarioActual);
+        ml.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -275,6 +296,7 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

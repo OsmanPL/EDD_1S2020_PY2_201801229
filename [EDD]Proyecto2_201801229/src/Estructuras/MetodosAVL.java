@@ -5,6 +5,7 @@
  */
 package Estructuras;
 import Clases.*;
+import java.util.ArrayList;
 /**
  *
  * @author l4kz4
@@ -66,7 +67,22 @@ public class MetodosAVL {
         aux.setAltura(Max(altura(aux.getHd()), nodo.getAltura())+1);
         return aux;
     }
-    
+    public ArrayList<Libro> lista(int carnet){
+        return listaLibros(raiz, carnet);
+    }
+    public ArrayList<Libro> listaLibros(AVLNode actual, int carnet){
+        ArrayList<Libro> lista = new ArrayList<Libro>();
+        if (actual!=null) {
+            lista.addAll(actual.getArbolB().devolver(carnet));
+            if (actual.getHi()!=null) {
+                lista.addAll(listaLibros(actual.getHi(),carnet));
+            }
+            if (actual.getHd()!=null) {
+                lista.addAll(listaLibros(actual.getHd(),carnet));
+            }
+        }
+        return lista;
+    }
     public AVLNode rotacionDobleIzquierda(AVLNode nodo){
         nodo.setHi(rotacionDerecha(nodo.getHi()));
         return rotacionIzquierda(nodo);

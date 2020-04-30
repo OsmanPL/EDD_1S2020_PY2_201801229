@@ -101,29 +101,71 @@ public class MetodosArbolB {
         }
         return sale;
     }
-
-    protected String eliminar(Libro valor){
-        if(ArbolB.contains(valor)){
-            BNode nuevonodo = new BNode(ordenarbol,true);
-            SubNodo Subn;
-            Libro eliminado = new Libro();
-            eliminado = valor;
-            ArbolB.remove(eliminado);
-            for (Libro integer : ArbolB) {
-                Subn = nuevonodo.insertar(integer);
-                if(Subn != null){
-                    nuevonodo = Subn.toRaiz();
+    public ArrayList<Libro> devolver(int carnet){
+        Queue<BNode> cola = new LinkedList<BNode>();
+        ArrayList <BNode> sale = new ArrayList<BNode>();
+        sale.add(nodo);
+        cola.add(nodo);
+        while (!cola.isEmpty()){
+            BNode nod = cola.poll();
+            for (BNode hijo: nod.getSubNodos()){
+                hijo.setNivel(nod.getNivel() + 1);
+                sale.add(hijo);
+                cola.add(hijo);
+            }
+        }
+        ArrayList <Libro> libros = new ArrayList<Libro>();
+        for (BNode node: sale) {
+            if (node!=null) {
+                for (Libro libro: node.getValoresNodo()) {
+                    if (libro!=null) {
+                        if (libro.getCarnetUsuario()==carnet) {
+                            libros.add(libro);
+                        }
+                    }
                 }
             }
-            nodo = nuevonodo;
-            return "El #"+valor+" esta eliminado.";
-        }else{
-            return "Elemento no registrado.";
         }
+        return libros;
     }
 
-    public BNode buscar(Libro valor){
-        return nodo.buscarnodo(valor);
+    protected String eliminar(int ISBN){
+        String retornar = "Elemento no registrado.";
+        for (Libro valor:ArbolB ) {
+            if (valor!=null) {
+                if (valor.getISBN()==ISBN) {
+                    if(ArbolB.contains(valor)){
+                        BNode nuevonodo = new BNode(ordenarbol,true);
+                        SubNodo Subn;
+                        Libro eliminado = new Libro();
+                        eliminado = valor;
+                        ArbolB.remove(eliminado);
+                        for (Libro integer : ArbolB) {
+                            Subn = nuevonodo.insertar(integer);
+                            if(Subn != null){
+                                nuevonodo = Subn.toRaiz();
+                            }
+                        }
+                        nodo = nuevonodo;
+                        return "El #"+valor+" esta eliminado.";
+                    }else{
+                        return "Elemento no registrado.";
+                    }
+                }
+            }
+        }
+        return retornar;
+    }
+
+    public BNode buscar(int ISBN){
+        for (Libro valor:ArbolB) {
+            if (valor!=null) {
+                if (valor.getISBN()==ISBN) {
+                    return nodo.buscarnodo(valor);
+                }
+            }
+        }
+        return null;
     }
     /**
      * @return the ordenarbol
