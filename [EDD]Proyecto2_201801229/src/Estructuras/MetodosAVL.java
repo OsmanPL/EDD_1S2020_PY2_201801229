@@ -119,6 +119,41 @@ public class MetodosAVL {
         }
         return lista;
     }
+    public ArrayList<String> iniciarCatalogo(){
+        return catalogo(raiz);
+    }
+    public ArrayList<String> catalogo(AVLNode actual){
+        ArrayList<String> catalogo = new ArrayList<String>();
+        if (actual!=null) {
+            catalogo.add(actual.getCategoria());
+            if (actual.getHi()!=null) {
+                catalogo.addAll(catalogo(actual.getHi()));
+            }
+            if (actual.getHd()!=null) {
+                catalogo.addAll(catalogo(actual.getHd()));
+            }
+        }
+        return catalogo;
+    }
+    public ArrayList<Libro> todosLosLibrosCategoria(String categoria){
+        return listaTodosCategoria(raiz, categoria);
+    }
+    public ArrayList<Libro> listaTodosCategoria(AVLNode actual, String categoria){
+        ArrayList<Libro> lista = new ArrayList<Libro>();
+        if (actual!=null) {
+            if (actual.getCategoria().compareTo(categoria)==0) {
+                lista = actual.getArbolB().todosLosLibros();
+            }else{
+                if (actual.getCategoria().compareTo(categoria)<0) {
+                    lista = listaTodosCategoria(actual.getHd(),categoria);
+                }
+                else if (actual.getCategoria().compareTo(categoria)>0) {
+                    lista = listaTodosCategoria(actual.getHi(),categoria);
+                }
+            }
+        }
+        return lista;
+    }
     public ArrayList<Libro> todosLosLibros(){
         return listaTodos(raiz);
     }
