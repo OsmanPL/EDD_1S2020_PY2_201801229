@@ -129,11 +129,11 @@ public class MetodosArbolB {
         return libros;
     }
 
-    protected String eliminar(int ISBN){
+    protected String eliminar(int ISBN, int carnet){
         String retornar = "Elemento no registrado.";
         for (Libro valor:ArbolB ) {
             if (valor!=null) {
-                if (valor.getISBN()==ISBN) {
+                if (valor.getISBN()==ISBN && valor.getCarnetUsuario()==carnet) {
                     if(ArbolB.contains(valor)){
                         BNode nuevonodo = new BNode(ordenarbol,true);
                         SubNodo Subn;
