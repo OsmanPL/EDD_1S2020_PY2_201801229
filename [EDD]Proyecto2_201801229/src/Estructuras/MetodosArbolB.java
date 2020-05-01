@@ -101,6 +101,60 @@ public class MetodosArbolB {
         }
         return sale;
     }
+    
+    public ArrayList<Libro> buscarTitulo(String titulo){
+        Queue<BNode> cola = new LinkedList<BNode>();
+        ArrayList <BNode> sale = new ArrayList<BNode>();
+        sale.add(nodo);
+        cola.add(nodo);
+        while (!cola.isEmpty()){
+            BNode nod = cola.poll();
+            for (BNode hijo: nod.getSubNodos()){
+                hijo.setNivel(nod.getNivel() + 1);
+                sale.add(hijo);
+                cola.add(hijo);
+            }
+        }
+        ArrayList <Libro> libros = new ArrayList<Libro>();
+        for (BNode node: sale) {
+            if (node!=null) {
+                for (Libro libro: node.getValoresNodo()) {
+                    if (libro!=null) {
+                        if (libro.getTitulo().contains(titulo)) {
+                            libros.add(libro);
+                        }
+                    }
+                }
+            }
+        }
+        return libros;
+    }
+    public ArrayList<Libro> todosLosLibros(){
+        Queue<BNode> cola = new LinkedList<BNode>();
+        ArrayList <BNode> sale = new ArrayList<BNode>();
+        sale.add(nodo);
+        cola.add(nodo);
+        while (!cola.isEmpty()){
+            BNode nod = cola.poll();
+            for (BNode hijo: nod.getSubNodos()){
+                hijo.setNivel(nod.getNivel() + 1);
+                sale.add(hijo);
+                cola.add(hijo);
+            }
+        }
+        ArrayList <Libro> libros = new ArrayList<Libro>();
+        for (BNode node: sale) {
+            if (node!=null) {
+                for (Libro libro: node.getValoresNodo()) {
+                    if (libro!=null) {
+                        libros.add(libro);
+                    }
+                }
+            }
+        }
+        return libros;
+    }
+    
     public ArrayList<Libro> devolver(int carnet){
         Queue<BNode> cola = new LinkedList<BNode>();
         ArrayList <BNode> sale = new ArrayList<BNode>();
@@ -129,8 +183,7 @@ public class MetodosArbolB {
         return libros;
     }
 
-    protected String eliminar(int ISBN, int carnet){
-        String retornar = "Elemento no registrado.";
+    protected Libro eliminar(int ISBN, int carnet){
         for (Libro valor:ArbolB ) {
             if (valor!=null) {
                 if (valor.getISBN()==ISBN && valor.getCarnetUsuario()==carnet) {
@@ -147,14 +200,14 @@ public class MetodosArbolB {
                             }
                         }
                         nodo = nuevonodo;
-                        return "El #"+valor+" esta eliminado.";
+                        return valor;
                     }else{
-                        return "Elemento no registrado.";
+                        return null;
                     }
                 }
             }
         }
-        return retornar;
+        return null;
     }
 
     public BNode buscar(int ISBN){

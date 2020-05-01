@@ -41,6 +41,26 @@ public class MetodosAVL {
         root.setAltura(Max(altura(root.getHi()), altura(root.getHd())) + 1);
         return root;
     }
+    public Libro iniciarEliminar(int ISBN, int carnet){
+        return eliminar(raiz,ISBN,carnet);
+    }
+    public Libro eliminar(AVLNode actual, int ISBN, int carnet){
+        if (actual!=null) {
+            Libro retornar = actual.getArbolB().eliminar(ISBN, carnet);
+            if (retornar!=null) {
+                return retornar;
+            }else{
+                if (actual.getHi()!=null && retornar == null) {
+                    retornar = eliminar(actual.getHi(),ISBN,carnet);
+                }
+                if (actual.getHd()!=null && retornar == null) {
+                    retornar = eliminar(actual.getHd(),ISBN,carnet);
+                }
+                return retornar;
+            }
+        }
+        return null;
+    }
     
     public int Max(int alturaIzquierda, int alturaDerecha){
         return alturaIzquierda>alturaDerecha?alturaIzquierda:alturaDerecha;
@@ -83,6 +103,39 @@ public class MetodosAVL {
         }
         return lista;
     }
+    public ArrayList<Libro> busquedaTitutlo(String titulo){
+        return listaTitulo(raiz,titulo);
+    }
+    public ArrayList<Libro> listaTitulo(AVLNode actual, String titulo){
+        ArrayList<Libro> lista = new ArrayList<Libro>();
+        if (actual!=null) {
+            lista.addAll(actual.getArbolB().buscarTitulo(titulo));
+            if (actual.getHi()!=null) {
+                lista.addAll(listaTitulo(actual.getHi(), titulo));
+            }
+            if (actual.getHd()!=null) {
+                lista.addAll(listaTitulo(actual.getHd(),titulo));
+            }
+        }
+        return lista;
+    }
+    public ArrayList<Libro> todosLosLibros(){
+        return listaTodos(raiz);
+    }
+    public ArrayList<Libro> listaTodos(AVLNode actual){
+        ArrayList<Libro> lista = new ArrayList<Libro>();
+        if (actual!=null) {
+            lista.addAll(actual.getArbolB().todosLosLibros());
+            if (actual.getHi()!=null) {
+                lista.addAll(listaTodos(actual.getHi()));
+            }
+            if (actual.getHd()!=null) {
+                lista.addAll(listaTodos(actual.getHd()));
+            }
+        }
+        return lista;
+    }
+    
     public AVLNode rotacionDobleIzquierda(AVLNode nodo){
         nodo.setHi(rotacionDerecha(nodo.getHi()));
         return rotacionIzquierda(nodo);
