@@ -13,58 +13,29 @@ import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author l4kz4
  */
-public class Catologo extends javax.swing.JFrame {
+public class Reportes extends javax.swing.JFrame {
 
     /**
-     * Creates new form Catologo
+     * Creates new form Reportes
      */
-    DefaultTableModel model = new DefaultTableModel();
     Usuario usuarioActual = new Usuario();
-    ArrayList<Libro> libros = new ArrayList<Libro>();
-    public Catologo(Usuario actual) {
+    public Reportes(Usuario actual) {
         initComponents();
         usuarioActual = actual;
-        libros = mavl.todosLosLibros();
-        cargaDeDatos();
         cargaItem();
+        jComboBox2.setVisible(false);
+        jLabel1.setVisible(false);
     }
-    
-    public void cargaDeDatos(){
-        model = new DefaultTableModel();
-        model.addColumn("ISBN");
-        model.addColumn("Titulo");
-        model.addColumn("Autor");
-        model.addColumn("Editorail");
-        model.addColumn("Año");
-        model.addColumn("Edicion");
-        model.addColumn("Categoria");
-        model.addColumn("Idioma");
-        model.addColumn("Carnet Usuario");
-        
-        for (Libro libro:libros) {
-            if (libro!=null) {
-                Object[] dato = new Object[]{libro.getISBN(),libro.getTitulo(),
-                libro.getAutor(),libro.getEditorial(),libro.getAño(),
-                libro.getEdicion(),libro.getCategoria(),libro.getIdioma(),
-                libro.getCarnetUsuario()};
-                model.addRow(dato);
-            }
-        }
-        
-        jTable1.setModel(model);
-    }
-    
-    public void cargaItem(){
+
+     public void cargaItem(){
         ArrayList<String> catalogo = mavl.iniciarCatalogo();
-        jComboBox1.addItem("Todas");
         for (String categoria:catalogo) {
             if (categoria!=null) {
-                jComboBox1.addItem(categoria);
+                jComboBox2.addItem(categoria);
             }
         }
     }
@@ -80,8 +51,10 @@ public class Catologo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,44 +66,43 @@ public class Catologo extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 20));
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Arbol AVL: Categorias", "Arbol B: Libros", "Tabla Hash: Usuarios" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
             }
         });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 180, -1));
+
+        jButton2.setText("Generar Reporte");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 260, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 120, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 180, -1));
 
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Categoria:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 70, -1));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 680, 460));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Reporte:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 70, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
         );
 
         pack();
@@ -147,12 +119,13 @@ public class Catologo extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             String categoria = jComboBox1.getSelectedItem().toString();
-            if (categoria.equals("Todas")) {
-                libros = mavl.todosLosLibros();
+            if (categoria.equals("Arbol B: Libros")) {
+                jComboBox2.setVisible(true);
+                jLabel1.setVisible(true);
             }else{
-                libros = mavl.todosLosLibrosCategoria(categoria);
+                jComboBox2.setVisible(false);
+                jLabel1.setVisible(false);
             }
-            cargaDeDatos();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,
                 "Error: "+ex,
@@ -160,17 +133,29 @@ public class Catologo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        try{
+            String categoria = jComboBox1.getSelectedItem().toString();
+            if (categoria.equals("Arbol B: AVL")) {
+                mavl.graficarArbol();
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,
+                "Error: "+ex,
+                "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-   
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

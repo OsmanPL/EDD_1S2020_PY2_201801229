@@ -1,0 +1,11 @@
+digraph ArbolAVL{
+Revista;
+Revista->Drama;
+Drama;
+Drama->Biografia;
+Biografia;
+Drama->Epico;
+Epico;
+Revista->Sagas;
+Sagas;
+}

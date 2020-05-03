@@ -5,6 +5,9 @@
  */
 package Estructuras;
 import Clases.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
@@ -249,13 +252,22 @@ public class MetodosAVL {
                 AVLNode temp = null;
                 if (temp == root.getHi()) {
                     temp = root.getHd();
-                }else{
+                }else if (temp == root.getHd()){
                     temp = root.getHi();
+                }else{
+                    temp = null;
                 }
                 if (temp==null) {
                     temp = root;
                     root=null;
                 }else{
+                    ArrayList<Integer> eliminados = new ArrayList<Integer>();
+                    for (Libro libro:root.getArbolB().getArbolB()) {
+                        if (libro!=null) {
+                            eliminados.add(libro.getISBN());
+                        }
+                    }
+                    isbn.removeAll(eliminados);
                     root=temp;
                 }
             }else{
@@ -269,28 +281,27 @@ public class MetodosAVL {
                 isbn.removeAll(eliminados);
                 root.setCategoria(temp.getCategoria());
                 root.setArbolB(temp.getArbolB());
-                
                 root.setHd(delete(root.getHd(),temp.getCategoria()));
             }
         }
         if (root==null) {
             return root;
         }
-            root.setAltura(Max(altura(root.getHi()), altura(root.getHd())) + 1);
+            
             if (altura(root.getHi())-altura(root.getHd())==2) {
-                if (categoria.compareTo(root.getHi().getCategoria())<0) {
+                if (categoria.compareTo(root.getHi().getCategoria())>0) {
                     return rotacionIzquierda(root);
                 }else{
                     return rotacionDobleIzquierda(root);
                 }
             }else if (altura(root.getHd())-altura(root.getHi())==2) {
-                if (categoria.compareTo(root.getHd().getCategoria())>0) {
+                if (categoria.compareTo(root.getHd().getCategoria())<0) {
                     return rotacionDerecha(root);
                 }else{
                     return rotacionDobleDerecha(root);
                 }
             }
-        
+        root.setAltura(Max(altura(root.getHi()), altura(root.getHd())) + 1);
         return root;
     }
     
@@ -301,5 +312,54 @@ public class MetodosAVL {
         }
         return actual;
     }
-    
+    public void graficarArbol(){
+        String grafica = "digraph ArbolAVL{\n"; 
+        grafica += graficar(raiz);
+        grafica += "}";
+        FileWriter flwriter = null;
+	try {
+            //crea el flujo para escribir en el archivo
+            flwriter = new FileWriter("ArbolAVL.txt");
+            //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
+            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            bfwriter.write(grafica);
+            //cierra el buffer intermedio
+            bfwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+	} finally {
+            if (flwriter != null) {			
+                try {//cierra el flujo principal
+                    flwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        try{       
+            ProcessBuilder pbuilder;
+            String direccionPng = "ArbolAVL.png";
+            String direccionDot = "ArbolAVL.txt";
+            pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o", direccionPng, direccionDot );
+            pbuilder.redirectErrorStream( true );
+            //Ejecuta el proceso
+            pbuilder.start();	    
+	}catch(Exception e) { e.printStackTrace(); }
+        
+    }
+    public String graficar(AVLNode root){
+        String grafica = "";
+        if (root!=null) {
+            grafica += root.getCategoria()+";\n";
+            if (root.getHi()!=null) {
+                grafica+= root.getCategoria()+"->"+root.getHi().getCategoria()+";\n";
+                grafica+= graficar(root.getHi());
+            }
+            if (root.getHd()!=null) {
+                grafica+= root.getCategoria()+"->"+root.getHd().getCategoria()+";\n";
+                grafica+= graficar(root.getHd());
+            }
+        }
+        return grafica;
+    }
 }
