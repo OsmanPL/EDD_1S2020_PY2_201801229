@@ -86,11 +86,11 @@ public class LecturaArchivos {
                     
                     AVLNode libros = mavl.buscar(categoria);
                     if (libros != null) {
-                        libros.getArbolB().Insertar(nuevo);
+                        mavl.insertarLibro(libros, nuevo);
                     }else{
                         mavl.insert(categoria);
                         libros = mavl.buscar(categoria);
-                        libros.getArbolB().Insertar(nuevo);
+                        mavl.insertarLibro(libros, nuevo);
                     }
                  }
             }

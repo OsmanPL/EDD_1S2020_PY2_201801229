@@ -190,7 +190,7 @@ public class Biblioteca extends javax.swing.JFrame {
         jButton10.setText("Configuración");
         jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 180, 40));
 
-        jButton11.setText("Crear Categoria");
+        jButton11.setText("Categorias");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
@@ -206,7 +206,7 @@ public class Biblioteca extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
         );
 
         pack();
@@ -312,11 +312,15 @@ public class Biblioteca extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        tablaHash.Borrar(usuarioActual.getCarnet());
+        this.hide();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-        
+        Categorias cat = new Categorias(usuarioActual);
+        cat.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_jButton11ActionPerformed
 
 

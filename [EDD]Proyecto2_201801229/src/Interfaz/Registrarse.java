@@ -168,10 +168,13 @@ public class Registrarse extends javax.swing.JFrame {
             String apellido = jTextField3.getText();
             String carrera = jTextField4.getText();
             String password = jPasswordField1.getText();
+            if (jTextField1.getText().equals("") || jTextField2.getText().equals("")|| jTextField3.getText().equals("")|| jTextField4.getText().equals("")|| jPasswordField1.getText().equals("")) {
+                JOptionPane.showMessageDialog(null,"Debe llenar todos los campos",
+                "Usuario",JOptionPane.ERROR_MESSAGE);
+            }else{
             Usuario nuevoUsuario = new Usuario(carnet,nombre,apellido,carrera,password);
             tablaHash.insertar(nuevoUsuario);
-            JOptionPane.showMessageDialog(null,"Usuario Creado Correctamente",
-                "Usuario",JOptionPane.INFORMATION_MESSAGE);
+            }
             
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Usuario No Creado \nError: "+ex.toString(),

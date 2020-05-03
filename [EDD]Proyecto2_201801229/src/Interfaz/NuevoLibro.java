@@ -142,16 +142,22 @@ public class NuevoLibro extends javax.swing.JFrame {
                 "Error",JOptionPane.WARNING_MESSAGE);
         }else{
             if (libros != null) {
-                libros.getArbolB().Insertar(nuevo);
+                mavl.insertarLibro(libros, nuevo);
             }else{
                 mavl.insert(categoria);
                 libros = mavl.buscar(categoria);
-                libros.getArbolB().Insertar(nuevo);
+                mavl.insertarLibro(libros, nuevo);
             }
-            JOptionPane.showMessageDialog(null,
-                "Se a guardado un nuevo libro",
-                "Libro",JOptionPane.INFORMATION_MESSAGE);
+            
         }
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

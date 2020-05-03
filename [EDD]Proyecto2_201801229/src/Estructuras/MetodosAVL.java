@@ -6,15 +6,27 @@
 package Estructuras;
 import Clases.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author l4kz4
  */
 public class MetodosAVL {
     AVLNode raiz;
-    
+    ArrayList<Integer> isbn = new ArrayList<Integer>();
     public void insert(String categoria){
         raiz = insertar(raiz, categoria);
+    }
+    public void insertarLibro(AVLNode nodo, Libro libro){
+        if (isbn.contains(libro.getISBN())) {
+            JOptionPane.showMessageDialog(null,
+                "El codigo ISBN ya esta asignado a otro libro",
+                "Libro",JOptionPane.ERROR_MESSAGE);
+        }else{
+        isbn.add(libro.getISBN());
+        nodo.getArbolB().Insertar(libro);
+        }
+        
     }
     public AVLNode insertar(AVLNode root, String categoria){
         if (root==null) {
@@ -207,4 +219,87 @@ public class MetodosAVL {
             imprimir(nodo.getHi());
         }
     }
+    public ArrayList<AVLNode> devolverArbol(){
+        return devolverCategorias(raiz);
+    }
+    public ArrayList<AVLNode> devolverCategorias(AVLNode nodo){
+        ArrayList<AVLNode> devolver = new ArrayList<AVLNode>();
+        if (nodo!=null) {
+            devolver.add(nodo);
+            if (nodo.getHi()!=null) {
+                devolver.addAll(devolverCategorias(nodo.getHi()));
+            }
+            if (nodo.getHd()!=null) {
+                devolver.addAll(devolverCategorias(nodo.getHd()));
+            }
+        }
+        return devolver;
+    }
+    public void eliminar(String categoria){
+        raiz = delete(raiz, categoria);
+    }
+    public AVLNode delete(AVLNode root, String categoria){
+        if (root==null) {
+            return root;
+        }
+        else if(categoria.compareTo(root.getCategoria())<0){root.setHi(delete(root.getHi(),categoria));}
+        else if(categoria.compareTo(root.getCategoria())>0){root.setHd(delete(root.getHd(),categoria));}
+        else{
+            if (root.getHi()==null || root.getHd()==null) {
+                AVLNode temp = null;
+                if (temp == root.getHi()) {
+                    temp = root.getHd();
+                }else{
+                    temp = root.getHi();
+                }
+                if (temp==null) {
+                    temp = root;
+                    root=null;
+                }else{
+                    root=temp;
+                }
+            }else{
+                AVLNode temp = minVal(root.getHd());
+                ArrayList<Integer> eliminados = new ArrayList<Integer>();
+                for (Libro libro:root.getArbolB().getArbolB()) {
+                    if (libro!=null) {
+                        eliminados.add(libro.getISBN());
+                    }
+                }
+                isbn.removeAll(eliminados);
+                root.setCategoria(temp.getCategoria());
+                root.setArbolB(temp.getArbolB());
+                
+                root.setHd(delete(root.getHd(),temp.getCategoria()));
+            }
+        }
+        if (root==null) {
+            return root;
+        }
+            root.setAltura(Max(altura(root.getHi()), altura(root.getHd())) + 1);
+            if (altura(root.getHi())-altura(root.getHd())==2) {
+                if (categoria.compareTo(root.getHi().getCategoria())<0) {
+                    return rotacionIzquierda(root);
+                }else{
+                    return rotacionDobleIzquierda(root);
+                }
+            }else if (altura(root.getHd())-altura(root.getHi())==2) {
+                if (categoria.compareTo(root.getHd().getCategoria())>0) {
+                    return rotacionDerecha(root);
+                }else{
+                    return rotacionDobleDerecha(root);
+                }
+            }
+        
+        return root;
+    }
+    
+    private AVLNode minVal(AVLNode nodo){
+        AVLNode actual = nodo;
+        while(actual.getHi()!=null){
+            actual = actual.getHi();
+        }
+        return actual;
+    }
+    
 }

@@ -5,6 +5,8 @@
  */
 package Estructuras;
 import Clases.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author l4kz4
@@ -12,7 +14,7 @@ import Clases.*;
 public class MetodosTablaHash {
     private TablaHashNode[] tablaHash ; 
     private int tamaño;
-
+    private ArrayList<Integer> carnets = new ArrayList<Integer>();
     public MetodosTablaHash(int tamaño) {
         this.tamaño = tamaño;
         this.tablaHash = new TablaHashNode[this.tamaño];
@@ -23,13 +25,21 @@ public class MetodosTablaHash {
     }
     public void insertar(Usuario nuevoUsuario){
         int valorHash = FuncionHash(nuevoUsuario.getCarnet());
-        if (tablaHash[valorHash]!=null) {
+        if (carnets.contains(nuevoUsuario.getCarnet())) {
+            JOptionPane.showMessageDialog(null,
+                "El carnet esta repetido",
+                "Usuario",JOptionPane.ERROR_MESSAGE);
+        }else{
+            carnets.add(nuevoUsuario.getCarnet());
+            if (tablaHash[valorHash]!=null) {
             tablaHash[valorHash].insertar(nuevoUsuario);
         }else{
             TablaHashNode nuevoNodo = new TablaHashNode();
             tablaHash[valorHash] = nuevoNodo;
             tablaHash[valorHash].insertar(nuevoUsuario);
         }
+        }
+        
     }
     
     public Usuario ingresar(int carnet, String password){
