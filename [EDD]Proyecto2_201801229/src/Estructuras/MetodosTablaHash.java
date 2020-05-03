@@ -5,6 +5,11 @@
  */
 package Estructuras;
 import Clases.*;
+import java.awt.Desktop;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
@@ -82,5 +87,67 @@ public class MetodosTablaHash {
         }else{
             System.out.println("El Uuario No Existe");
         }
+    }
+    
+    public void graficar(){
+        String grafica = "digraph TablaHash{\nrankdir=\"LR\";\n node[shape=rect];\n";
+        grafica += "parent[label=<\n<table border='1' cellborder='1'>\n";
+        int i = 0;
+        for (TablaHashNode tn : tablaHash) {
+            grafica+= "<tr><td port='port_"+i+"' HEIGHT=\"50\">"+i+"</td></tr>";
+            i++;
+        }
+        i=0;
+        grafica+= "</table>\n>];";
+        for (TablaHashNode tn : tablaHash) {
+            if (tn!=null) {
+                if (tn.getListaUsuarios()!=null) {
+                    grafica+= tn.getListaUsuarios().grafica(i);
+                    grafica+="parent:port_"+i+" -> "+tn.getListaUsuarios().getInicio().getCarnet()+" [lhead=Usuario"+i+"];\n";
+                }
+                
+            }
+            i++;
+        }
+        grafica+="}";
+        FileWriter flwriter = null;
+	try {
+            //crea el flujo para escribir en el archivo
+            flwriter = new FileWriter("TablaHash.txt");
+            //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
+            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            bfwriter.write(grafica);
+            //cierra el buffer intermedio
+            bfwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+	} finally {
+            if (flwriter != null) {			
+                try {//cierra el flujo principal
+                    flwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        try{       
+            ProcessBuilder pbuilder;
+            String direccionPng = "TablaHash.png";
+            String direccionDot = "TablaHash.txt";
+            pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o", direccionPng, direccionDot );
+            pbuilder.redirectErrorStream( true );
+            //Ejecuta el proceso
+            pbuilder.start();	 
+	}catch(Exception e) { e.printStackTrace(); }
+        try {
+            String direccionPng = "TablaHash.png";
+            File objetofile = new File (direccionPng);
+            Desktop.getDesktop().open(objetofile);
+
+     }catch (IOException ex) {
+
+            System.out.println(ex);
+
+     }
     }
 }

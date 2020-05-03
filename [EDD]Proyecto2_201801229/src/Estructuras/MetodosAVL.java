@@ -5,7 +5,9 @@
  */
 package Estructuras;
 import Clases.*;
+import java.awt.Desktop;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -290,15 +292,15 @@ public class MetodosAVL {
             
             if (altura(root.getHi())-altura(root.getHd())==2) {
                 if (categoria.compareTo(root.getHi().getCategoria())>0) {
-                    return rotacionIzquierda(root);
-                }else{
                     return rotacionDobleIzquierda(root);
+                }else{
+                    return rotacionIzquierda(root);
                 }
             }else if (altura(root.getHd())-altura(root.getHi())==2) {
                 if (categoria.compareTo(root.getHd().getCategoria())<0) {
-                    return rotacionDerecha(root);
-                }else{
                     return rotacionDobleDerecha(root);
+                }else{
+                    return rotacionDerecha(root);
                 }
             }
         root.setAltura(Max(altura(root.getHi()), altura(root.getHd())) + 1);
@@ -343,14 +345,25 @@ public class MetodosAVL {
             pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o", direccionPng, direccionDot );
             pbuilder.redirectErrorStream( true );
             //Ejecuta el proceso
-            pbuilder.start();	    
+            pbuilder.start();	 
 	}catch(Exception e) { e.printStackTrace(); }
+        try {
+            String direccionPng = "ArbolAVL.png";
+            File objetofile = new File (direccionPng);
+            Desktop.getDesktop().open(objetofile);
+
+     }catch (IOException ex) {
+
+            System.out.println(ex);
+
+     }
+
         
     }
     public String graficar(AVLNode root){
         String grafica = "";
         if (root!=null) {
-            grafica += root.getCategoria()+";\n";
+            grafica += root.getCategoria()+" [label=\""+root.getCategoria()+", Libros: "+root.getArbolB().getArbolB().size()+"\"];\n";
             if (root.getHi()!=null) {
                 grafica+= root.getCategoria()+"->"+root.getHi().getCategoria()+";\n";
                 grafica+= graficar(root.getHi());

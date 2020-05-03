@@ -137,9 +137,12 @@ public class Reportes extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             String categoria = jComboBox1.getSelectedItem().toString();
-            if (categoria.equals("Arbol B: AVL")) {
+            if (categoria.equals("Arbol AVL: Categorias")) {
                 mavl.graficarArbol();
+            }else if (categoria.equals("Tabla Hash: Usuarios")) {
+                tablaHash.graficar();
             }
+            //Tabla Hash: Usuarios
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,
                 "Error: "+ex,

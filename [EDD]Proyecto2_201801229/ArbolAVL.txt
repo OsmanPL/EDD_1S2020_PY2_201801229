@@ -1,11 +1,21 @@
 digraph ArbolAVL{
-Revista;
-Revista->Drama;
-Drama;
-Drama->Biografia;
-Biografia;
-Drama->Epico;
-Epico;
+Informativos [label="Informativos, Libros: 18"];
+Informativos->Consulta;
+Consulta [label="Consulta, Libros: 12"];
+Consulta->Biografia;
+Biografia [label="Biografia, Libros: 3"];
+Consulta->Ensayo;
+Ensayo [label="Ensayo, Libros: 12"];
+Ensayo->Drama;
+Drama [label="Drama, Libros: 16"];
+Ensayo->Epico;
+Epico [label="Epico, Libros: 8"];
+Informativos->Lírico;
+Lírico [label="Lírico, Libros: 13"];
+Lírico->Literatura;
+Literatura [label="Literatura, Libros: 9"];
+Lírico->Revista;
+Revista [label="Revista, Libros: 6"];
 Revista->Sagas;
-Sagas;
+Sagas [label="Sagas, Libros: 2"];
 }
