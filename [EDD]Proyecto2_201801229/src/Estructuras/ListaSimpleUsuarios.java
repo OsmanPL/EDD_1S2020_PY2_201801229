@@ -76,7 +76,7 @@ public class ListaSimpleUsuarios {
         String grafica = "subgraph Usuario"+i+"{\nrankdir=\"LR\";\n node[shape=rect];\n";
         Usuario aux = getInicio();
         while(aux!=null){
-            grafica += aux.getCarnet() +"[label=\"Carnet: "+aux.getCarnet()+"\nNombre: "+aux.getNombre() +" "+aux.getApellido()+"\"];\n";
+            grafica += aux.getCarnet() +"[label=\"Carnet: "+aux.getCarnet()+"\nNombre: "+aux.getNombre() +" "+aux.getApellido()+"\nCarrera: "+aux.getCarrera()+"\nPassword: "+aux.getPassword()+"\"];\n";
             Usuario aux2 = aux.getSiguiente();
             if (aux2!=null) {
                 grafica+= aux.getCarnet() +" -> "+aux2.getCarnet()+";\n";

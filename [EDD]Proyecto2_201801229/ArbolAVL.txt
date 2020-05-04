@@ -2,11 +2,7 @@ digraph ArbolAVL{
 Informativos [label="Informativos
 Libros: 18
 Carnet: 201503476  "];
-Informativos->Ensayo;
-Ensayo [label="Ensayo
-Libros: 12
-Carnet: 201503476  "];
-Ensayo->Consulta;
+Informativos->Consulta;
 Consulta [label="Consulta
 Libros: 12
 Carnet: 201503476  "];
@@ -14,7 +10,11 @@ Consulta->Biografia;
 Biografia [label="Biografia
 Libros: 3
 Carnet: 201503476  "];
-Consulta->Drama;
+Consulta->Ensayo;
+Ensayo [label="Ensayo
+Libros: 12
+Carnet: 201503476  "];
+Ensayo->Drama;
 Drama [label="Drama
 Libros: 16
 Carnet: 201503476  "];

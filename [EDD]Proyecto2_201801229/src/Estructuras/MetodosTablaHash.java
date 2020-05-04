@@ -12,6 +12,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import java.util.Base64;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 /**
  *
  * @author l4kz4
@@ -30,6 +39,7 @@ public class MetodosTablaHash {
     }
     public void insertar(Usuario nuevoUsuario){
         int valorHash = FuncionHash(nuevoUsuario.getCarnet());
+        nuevoUsuario.setPassword(getMD5(nuevoUsuario.getPassword()));
         if (carnets.contains(nuevoUsuario.getCarnet())) {
             JOptionPane.showMessageDialog(null,
                 "El carnet esta repetido",
@@ -49,6 +59,7 @@ public class MetodosTablaHash {
     
     public Usuario ingresar(int carnet, String password){
         int valorHash = FuncionHash(carnet);
+        password = getMD5(password);
         if (tablaHash[valorHash]!=null) {
             Usuario buscarUsuario = tablaHash[valorHash].ingresar(carnet,password);
             if (buscarUsuario!=null) {
@@ -94,7 +105,7 @@ public class MetodosTablaHash {
         grafica += "parent[label=<\n<table border='1' cellborder='1'>\n";
         int i = 0;
         for (TablaHashNode tn : tablaHash) {
-            grafica+= "<tr><td port='port_"+i+"' HEIGHT=\"50\">"+i+"</td></tr>";
+            grafica+= "<tr><td port='port_"+i+"' HEIGHT=\"100\">"+i+"</td></tr>";
             i++;
         }
         i=0;
@@ -149,5 +160,22 @@ public class MetodosTablaHash {
             System.out.println(ex);
 
      }
+    }
+    
+    public static String getMD5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

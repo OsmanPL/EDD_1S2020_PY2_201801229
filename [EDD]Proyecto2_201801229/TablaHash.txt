@@ -3,50 +3,64 @@ rankdir="LR";
  node[shape=rect];
 parent[label=<
 <table border='1' cellborder='1'>
-<tr><td port='port_0' HEIGHT="50">0</td></tr><tr><td port='port_1' HEIGHT="50">1</td></tr><tr><td port='port_2' HEIGHT="50">2</td></tr><tr><td port='port_3' HEIGHT="50">3</td></tr><tr><td port='port_4' HEIGHT="50">4</td></tr><tr><td port='port_5' HEIGHT="50">5</td></tr><tr><td port='port_6' HEIGHT="50">6</td></tr><tr><td port='port_7' HEIGHT="50">7</td></tr><tr><td port='port_8' HEIGHT="50">8</td></tr><tr><td port='port_9' HEIGHT="50">9</td></tr><tr><td port='port_10' HEIGHT="50">10</td></tr><tr><td port='port_11' HEIGHT="50">11</td></tr><tr><td port='port_12' HEIGHT="50">12</td></tr><tr><td port='port_13' HEIGHT="50">13</td></tr><tr><td port='port_14' HEIGHT="50">14</td></tr><tr><td port='port_15' HEIGHT="50">15</td></tr><tr><td port='port_16' HEIGHT="50">16</td></tr><tr><td port='port_17' HEIGHT="50">17</td></tr><tr><td port='port_18' HEIGHT="50">18</td></tr><tr><td port='port_19' HEIGHT="50">19</td></tr><tr><td port='port_20' HEIGHT="50">20</td></tr><tr><td port='port_21' HEIGHT="50">21</td></tr><tr><td port='port_22' HEIGHT="50">22</td></tr><tr><td port='port_23' HEIGHT="50">23</td></tr><tr><td port='port_24' HEIGHT="50">24</td></tr><tr><td port='port_25' HEIGHT="50">25</td></tr><tr><td port='port_26' HEIGHT="50">26</td></tr><tr><td port='port_27' HEIGHT="50">27</td></tr><tr><td port='port_28' HEIGHT="50">28</td></tr><tr><td port='port_29' HEIGHT="50">29</td></tr><tr><td port='port_30' HEIGHT="50">30</td></tr><tr><td port='port_31' HEIGHT="50">31</td></tr><tr><td port='port_32' HEIGHT="50">32</td></tr><tr><td port='port_33' HEIGHT="50">33</td></tr><tr><td port='port_34' HEIGHT="50">34</td></tr><tr><td port='port_35' HEIGHT="50">35</td></tr><tr><td port='port_36' HEIGHT="50">36</td></tr><tr><td port='port_37' HEIGHT="50">37</td></tr><tr><td port='port_38' HEIGHT="50">38</td></tr><tr><td port='port_39' HEIGHT="50">39</td></tr><tr><td port='port_40' HEIGHT="50">40</td></tr><tr><td port='port_41' HEIGHT="50">41</td></tr><tr><td port='port_42' HEIGHT="50">42</td></tr><tr><td port='port_43' HEIGHT="50">43</td></tr><tr><td port='port_44' HEIGHT="50">44</td></tr></table>
+<tr><td port='port_0' HEIGHT="100">0</td></tr><tr><td port='port_1' HEIGHT="100">1</td></tr><tr><td port='port_2' HEIGHT="100">2</td></tr><tr><td port='port_3' HEIGHT="100">3</td></tr><tr><td port='port_4' HEIGHT="100">4</td></tr><tr><td port='port_5' HEIGHT="100">5</td></tr><tr><td port='port_6' HEIGHT="100">6</td></tr><tr><td port='port_7' HEIGHT="100">7</td></tr><tr><td port='port_8' HEIGHT="100">8</td></tr><tr><td port='port_9' HEIGHT="100">9</td></tr><tr><td port='port_10' HEIGHT="100">10</td></tr><tr><td port='port_11' HEIGHT="100">11</td></tr><tr><td port='port_12' HEIGHT="100">12</td></tr><tr><td port='port_13' HEIGHT="100">13</td></tr><tr><td port='port_14' HEIGHT="100">14</td></tr><tr><td port='port_15' HEIGHT="100">15</td></tr><tr><td port='port_16' HEIGHT="100">16</td></tr><tr><td port='port_17' HEIGHT="100">17</td></tr><tr><td port='port_18' HEIGHT="100">18</td></tr><tr><td port='port_19' HEIGHT="100">19</td></tr><tr><td port='port_20' HEIGHT="100">20</td></tr><tr><td port='port_21' HEIGHT="100">21</td></tr><tr><td port='port_22' HEIGHT="100">22</td></tr><tr><td port='port_23' HEIGHT="100">23</td></tr><tr><td port='port_24' HEIGHT="100">24</td></tr><tr><td port='port_25' HEIGHT="100">25</td></tr><tr><td port='port_26' HEIGHT="100">26</td></tr><tr><td port='port_27' HEIGHT="100">27</td></tr><tr><td port='port_28' HEIGHT="100">28</td></tr><tr><td port='port_29' HEIGHT="100">29</td></tr><tr><td port='port_30' HEIGHT="100">30</td></tr><tr><td port='port_31' HEIGHT="100">31</td></tr><tr><td port='port_32' HEIGHT="100">32</td></tr><tr><td port='port_33' HEIGHT="100">33</td></tr><tr><td port='port_34' HEIGHT="100">34</td></tr><tr><td port='port_35' HEIGHT="100">35</td></tr><tr><td port='port_36' HEIGHT="100">36</td></tr><tr><td port='port_37' HEIGHT="100">37</td></tr><tr><td port='port_38' HEIGHT="100">38</td></tr><tr><td port='port_39' HEIGHT="100">39</td></tr><tr><td port='port_40' HEIGHT="100">40</td></tr><tr><td port='port_41' HEIGHT="100">41</td></tr><tr><td port='port_42' HEIGHT="100">42</td></tr><tr><td port='port_43' HEIGHT="100">43</td></tr><tr><td port='port_44' HEIGHT="100">44</td></tr></table>
 >];subgraph Usuario1{
 rankdir="LR";
  node[shape=rect];
 201503476[label="Carnet: 201503476
-Nombre: Ricardo Cutz"];
+Nombre: Ricardo Cutz
+Carrera: Ingenieria en Sistemas
+Password: e10adc3949ba59abbe56e057f20f883e"];
 }
 parent:port_1 -> 201503476 [lhead=Usuario1];
 subgraph Usuario2{
 rankdir="LR";
  node[shape=rect];
 201503477[label="Carnet: 201503477
-Nombre: Juanito Hernandez"];
+Nombre: Juanito Hernandez
+Carrera: Ingenieria Civil
+Password: e10adc3949ba59abbe56e057f20f883e"];
 }
 parent:port_2 -> 201503477 [lhead=Usuario2];
 subgraph Usuario15{
 rankdir="LR";
  node[shape=rect];
 201807420[label="Carnet: 201807420
-Nombre: David Diaz"];
+Nombre: David Diaz
+Carrera: Ingenieria en Sistemas
+Password: e10adc3949ba59abbe56e057f20f883e"];
 201807420 -> 201801210;
 201801210[label="Carnet: 201801210
-Nombre: Alexander Avalos"];
+Nombre: Alexander Avalos
+Carrera: Ingenieria en Sistemas
+Password: e10adc3949ba59abbe56e057f20f883e"];
 }
 parent:port_15 -> 201807420 [lhead=Usuario15];
 subgraph Usuario20{
 rankdir="LR";
  node[shape=rect];
 201807335[label="Carnet: 201807335
-Nombre: Juan Diego Alvarado"];
+Nombre: Juan Diego Alvarado
+Carrera: Ingenieria en Sistemas
+Password: e10adc3949ba59abbe56e057f20f883e"];
 }
 parent:port_20 -> 201807335 [lhead=Usuario20];
 subgraph Usuario23{
 rankdir="LR";
  node[shape=rect];
 202005878[label="Carnet: 202005878
-Nombre: Antonio Hernandez"];
+Nombre: Antonio Hernandez
+Carrera: Ingenieria Electrica
+Password: e10adc3949ba59abbe56e057f20f883e"];
 }
 parent:port_23 -> 202005878 [lhead=Usuario23];
 subgraph Usuario34{
 rankdir="LR";
  node[shape=rect];
 201801229[label="Carnet: 201801229
-Nombre: Osman Pérez"];
+Nombre: Osman Pérez
+Carrera: Ingenieria en Sistemas
+Password: fae0b27c451c728867a567e8c1bb4e53"];
 }
 parent:port_34 -> 201801229 [lhead=Usuario34];
 }

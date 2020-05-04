@@ -2,46 +2,21 @@ digraph ArbolB{
  node[shape=rect];
 parent0[label=<
 <table border='1' cellborder='1'>
-<tr><td port='port_00'>H0</td><td >ISBN: 10844</td><td port='port_01'>H1</td></tr></table>
+<tr><td port='port_00'>H0</td><td ><table cellspacing='0'><tr><td>ISBN: 10809</td></tr><tr><td>Titulo: Cómo educar la voluntad</td></tr><tr><td>Autor: ESCUDERO, JOSÉ ANTONIO</td></tr><tr><td>Editorail: AB Allhems Tryckerier</td></tr><tr><td>Año: 2001</td></tr><tr><td>Edicion: 1</td></tr><tr><td>Categoria: Epico</td></tr><tr><td>Idioma: Español</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_01'>H1</td><td ><table cellspacing='0'><tr><td>ISBN: 10876</td></tr><tr><td>Titulo: Sociología de la educación</td></tr><tr><td>Autor: ESPEJA, JESÚS</td></tr><tr><td>Editorail: ACANTO</td></tr><tr><td>Año: 1964</td></tr><tr><td>Edicion: 1</td></tr><tr><td>Categoria: Epico</td></tr><tr><td>Idioma: Aleman</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_02'>H2</td></tr></table>
 >];
 parent0:port_00 -> parent1;
 parent1[label=<
 <table border='1' cellborder='1'>
-<tr><td port='port_10'>H0</td><td >ISBN: 10774</td><td port='port_11'>H1</td><td >ISBN: 10786</td><td port='port_12'>H2</td></tr></table>
+<tr><td port='port_10'>H0</td><td ><table cellspacing='0'><tr><td>ISBN: 10807</td></tr><tr><td>Titulo: Educar el carácter</td></tr><tr><td>Autor: ESCUDERO POBLETE, GASTÓN</td></tr><tr><td>Editorail: A.T.E.</td></tr><tr><td>Año: 2001</td></tr><tr><td>Edicion: 1</td></tr><tr><td>Categoria: Epico</td></tr><tr><td>Idioma: Español</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_11'>H1</td><td ><table cellspacing='0'><tr><td>ISBN: 10808</td></tr><tr><td>Titulo: Educar los sentimientos</td></tr><tr><td>Autor: ESCUDERO, JORDI AINAUD I</td></tr><tr><td>Editorail: AATCC</td></tr><tr><td>Año: 2001</td></tr><tr><td>Edicion: 1</td></tr><tr><td>Categoria: Epico</td></tr><tr><td>Idioma: Español</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_12'>H2</td></tr></table>
 >];
-parent1:port_10 -> parent2;
+parent0:port_01 -> parent2;
 parent2[label=<
 <table border='1' cellborder='1'>
-<tr><td port='port_20'>H0</td><td >ISBN: 10772</td><td port='port_21'>H1</td><td >ISBN: 10773</td><td port='port_22'>H2</td></tr></table>
+<tr><td port='port_20'>H0</td><td ><table cellspacing='0'><tr><td>ISBN: 10874</td></tr><tr><td>Titulo: Introducción a la vida política</td></tr><tr><td>Autor: ESPARZA, MIGUEL ÁNGEL</td></tr><tr><td>Editorail: Acali</td></tr><tr><td>Año: 1969</td></tr><tr><td>Edicion: 2</td></tr><tr><td>Categoria: Epico</td></tr><tr><td>Idioma: Español</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_21'>H1</td><td ><table cellspacing='0'><tr><td>ISBN: 10875</td></tr><tr><td>Titulo: El lenguaje y la vida humana</td></tr><tr><td>Autor: ESPASA-CALPE</td></tr><tr><td>Editorail: Acantilado</td></tr><tr><td>Año: 1966</td></tr><tr><td>Edicion: 1</td></tr><tr><td>Categoria: Epico</td></tr><tr><td>Idioma: Español</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_22'>H2</td></tr></table>
 >];
-parent1:port_11 -> parent3;
+parent0:port_02 -> parent3;
 parent3[label=<
 <table border='1' cellborder='1'>
-<tr><td port='port_30'>H0</td><td >ISBN: 10775</td><td port='port_31'>H1</td><td >ISBN: 10783</td><td port='port_32'>H2</td></tr></table>
->];
-parent1:port_12 -> parent4;
-parent4[label=<
-<table border='1' cellborder='1'>
-<tr><td port='port_40'>H0</td><td >ISBN: 10840</td><td port='port_41'>H1</td><td >ISBN: 10842</td><td port='port_42'>H2</td></tr></table>
->];
-parent0:port_01 -> parent5;
-parent5[label=<
-<table border='1' cellborder='1'>
-<tr><td port='port_50'>H0</td><td >ISBN: 10848</td><td port='port_51'>H1</td><td >ISBN: 10930</td><td port='port_52'>H2</td></tr></table>
->];
-parent5:port_50 -> parent6;
-parent6[label=<
-<table border='1' cellborder='1'>
-<tr><td port='port_60'>H0</td><td >ISBN: 10846</td><td port='port_61'>H1</td><td >ISBN: 10847</td><td port='port_62'>H2</td></tr></table>
->];
-parent5:port_51 -> parent7;
-parent7[label=<
-<table border='1' cellborder='1'>
-<tr><td port='port_70'>H0</td><td >ISBN: 10927</td><td port='port_71'>H1</td><td >ISBN: 10928</td><td port='port_72'>H2</td></tr></table>
->];
-parent5:port_52 -> parent8;
-parent8[label=<
-<table border='1' cellborder='1'>
-<tr><td port='port_80'>H0</td><td >ISBN: 10932</td><td port='port_81'>H1</td><td >ISBN: 10933</td><td port='port_82'>H2</td><td >ISBN: 10934</td><td port='port_83'>H3</td></tr></table>
+<tr><td port='port_30'>H0</td><td ><table cellspacing='0'><tr><td>ISBN: 13550</td></tr><tr><td>Titulo: Future libraries, future catalogues</td></tr><tr><td>Autor: FAT, CHOW YUN</td></tr><tr><td>Editorail: AGENGIA EspañolA DE COOPERACIÓN INTERNACIONAL / OIT</td></tr><tr><td>Año: 1996</td></tr><tr><td>Edicion: 1</td></tr><tr><td>Categoria: Epico</td></tr><tr><td>Idioma: Ingles</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_31'>H1</td><td ><table cellspacing='0'><tr><td>ISBN: 13551</td></tr><tr><td>Titulo: La revalorización del art nouveau en Guatemala (un caso : la casa Fénix)</td></tr><tr><td>Autor: FATÁS, GUILLERMO</td></tr><tr><td>Editorail: AGEXPRONT</td></tr><tr><td>Año: 2000</td></tr><tr><td>Edicion: 1</td></tr><tr><td>Categoria: Epico</td></tr><tr><td>Idioma: Español</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_32'>H2</td></tr></table>
 >];
 }
