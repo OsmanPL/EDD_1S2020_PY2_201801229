@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
 public class MetodosAVL {
     AVLNode raiz;
     ArrayList<Integer> isbn = new ArrayList<Integer>();
-    public void insert(String categoria){
-        raiz = insertar(raiz, categoria);
+    public void insert(String categoria, int carnet){
+        raiz = insertar(raiz, categoria, carnet);
     }
     public void insertarLibro(AVLNode nodo, Libro libro){
         if (isbn.contains(libro.getISBN())) {
@@ -33,11 +33,11 @@ public class MetodosAVL {
         }
         
     }
-    public AVLNode insertar(AVLNode root, String categoria){
+    public AVLNode insertar(AVLNode root, String categoria, int carnet){
         if (root==null) {
-            root = new AVLNode(categoria, null,null);
+            root = new AVLNode(categoria, null,null, carnet);
         }else if (categoria.compareTo(root.getCategoria())<0) {
-            root.setHi(insertar(root.getHi(),categoria));
+            root.setHi(insertar(root.getHi(),categoria, carnet));
             if (altura(root.getHi())-altura(root.getHd())==2) {
                 if (categoria.compareTo(root.getHi().getCategoria())<0) {
                     root = rotacionIzquierda(root);
@@ -46,7 +46,7 @@ public class MetodosAVL {
                 }
             }
         }else if (categoria.compareTo(root.getCategoria())>0) {
-            root.setHd(insertar(root.getHd(),categoria));
+            root.setHd(insertar(root.getHd(),categoria, carnet));
             if (altura(root.getHd())-altura(root.getHi())==2) {
                 if (categoria.compareTo(root.getHd().getCategoria())>0) {
                     root = rotacionDerecha(root);
@@ -240,16 +240,16 @@ public class MetodosAVL {
         }
         return devolver;
     }
-    public void eliminar(String categoria){
-        raiz = delete(raiz, categoria);
+    public void eliminar(String categoria, int carnet){
+        raiz = delete(raiz, categoria, carnet);
     }
-    public AVLNode delete(AVLNode root, String categoria){
+    public AVLNode delete(AVLNode root, String categoria,int carnet){
         if (root==null) {
             return root;
         }
-        else if(categoria.compareTo(root.getCategoria())<0){root.setHi(delete(root.getHi(),categoria));}
-        else if(categoria.compareTo(root.getCategoria())>0){root.setHd(delete(root.getHd(),categoria));}
-        else{
+        else if(categoria.compareTo(root.getCategoria())<0){root.setHi(delete(root.getHi(),categoria, carnet));}
+        else if(categoria.compareTo(root.getCategoria())>0){root.setHd(delete(root.getHd(),categoria, carnet));}
+        else if(carnet == root.getCarnetUsuario()){
             if (root.getHi()==null || root.getHd()==null) {
                 AVLNode temp = null;
                 if (temp == root.getHi()) {
@@ -283,7 +283,8 @@ public class MetodosAVL {
                 isbn.removeAll(eliminados);
                 root.setCategoria(temp.getCategoria());
                 root.setArbolB(temp.getArbolB());
-                root.setHd(delete(root.getHd(),temp.getCategoria()));
+                root.setCarnetUsuario(temp.getCarnetUsuario());
+                root.setHd(delete(root.getHd(),temp.getCategoria(), temp.getCarnetUsuario()));
             }
         }
         if (root==null) {
@@ -363,7 +364,7 @@ public class MetodosAVL {
     public String graficar(AVLNode root){
         String grafica = "";
         if (root!=null) {
-            grafica += root.getCategoria()+" [label=\""+root.getCategoria()+", Libros: "+root.getArbolB().getArbolB().size()+"\"];\n";
+            grafica += root.getCategoria()+" [label=\""+root.getCategoria()+"\nLibros: "+root.getArbolB().getArbolB().size()+"\nCarnet: "+root.getCarnetUsuario()+"  \"];\n";
             if (root.getHi()!=null) {
                 grafica+= root.getCategoria()+"->"+root.getHi().getCategoria()+";\n";
                 grafica+= graficar(root.getHi());
@@ -374,5 +375,50 @@ public class MetodosAVL {
             }
         }
         return grafica;
+    }
+    public void graficarArbolB(AVLNode actual){
+        String grafica = "digraph ArbolB{\n node[shape=rect];\n"; 
+        grafica += actual.getArbolB().imprimirGrafico(actual.getArbolB());
+        grafica += "}";
+        FileWriter flwriter = null;
+	try {
+            //crea el flujo para escribir en el archivo
+            flwriter = new FileWriter("ArbolB.txt");
+            //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
+            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            bfwriter.write(grafica);
+            //cierra el buffer intermedio
+            bfwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+	} finally {
+            if (flwriter != null) {			
+                try {//cierra el flujo principal
+                    flwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        try{       
+            ProcessBuilder pbuilder;
+            String direccionPng = "ArbolB.png";
+            String direccionDot = "ArbolB.txt";
+            pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o", direccionPng, direccionDot );
+            pbuilder.redirectErrorStream( true );
+            //Ejecuta el proceso
+            pbuilder.start();	 
+	}catch(Exception e) { e.printStackTrace(); }
+        try {
+            String direccionPng = "ArbolB.png";
+            File objetofile = new File (direccionPng);
+            Desktop.getDesktop().open(objetofile);
+
+     }catch (IOException ex) {
+
+            System.out.println(ex);
+
+     }
+
     }
 }

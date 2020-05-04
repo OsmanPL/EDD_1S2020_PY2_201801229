@@ -141,6 +141,13 @@ public class Reportes extends javax.swing.JFrame {
                 mavl.graficarArbol();
             }else if (categoria.equals("Tabla Hash: Usuarios")) {
                 tablaHash.graficar();
+            }else if (categoria.equals("Arbol B: Libros")) {
+                String cat = "";
+                cat = jComboBox2.getSelectedItem().toString();
+                AVLNode ca = mavl.buscar(cat);
+                if (ca!=null) {
+                   mavl.graficarArbolB(ca);
+                }
             }
             //Tabla Hash: Usuarios
         }catch(Exception ex){

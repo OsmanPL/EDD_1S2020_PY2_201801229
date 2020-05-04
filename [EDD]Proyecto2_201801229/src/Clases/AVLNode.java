@@ -14,6 +14,7 @@ public class AVLNode {
     private MetodosArbolB arbolB;
     private AVLNode hi, hd;
     private int altura;
+    private int carnetUsuario;
     
     public AVLNode() {
     }
@@ -24,12 +25,13 @@ public class AVLNode {
         this.altura = 0;
     }
 
-    public AVLNode(String categoria, AVLNode hi, AVLNode hd) {
+    public AVLNode(String categoria, AVLNode hi, AVLNode hd, int carnet) {
         this.categoria = categoria;
         this.hi = hi;
         this.hd = hd;
         this.arbolB = new MetodosArbolB(5);
         this.altura = 0;
+        this.carnetUsuario = carnet;
     }
     
     
@@ -103,5 +105,19 @@ public class AVLNode {
      */
     public void setAltura(int altura) {
         this.altura = altura;
+    }
+
+    /**
+     * @return the carnetUsuario
+     */
+    public int getCarnetUsuario() {
+        return carnetUsuario;
+    }
+
+    /**
+     * @param carnetUsuario the carnetUsuario to set
+     */
+    public void setCarnetUsuario(int carnetUsuario) {
+        this.carnetUsuario = carnetUsuario;
     }
 }

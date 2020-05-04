@@ -144,7 +144,7 @@ public class NuevoLibro extends javax.swing.JFrame {
             if (libros != null) {
                 mavl.insertarLibro(libros, nuevo);
             }else{
-                mavl.insert(categoria);
+                mavl.insert(categoria, usuarioActual.getCarnet());
                 libros = mavl.buscar(categoria);
                 mavl.insertarLibro(libros, nuevo);
             }

@@ -19,7 +19,7 @@ public class MetodosArbolB {
     private ArrayList<Libro> ArbolB;
     private BNode nodo;
     private int contadornodos = 1;
-    
+    private int i = 0;
      public MetodosArbolB(int orden){
         setOrdenarbol(orden);//Me indica en que orden es el arbolB.
         setNodo(new BNode(orden,true));//Instancia el primer nodo como raiz.
@@ -69,21 +69,41 @@ public class MetodosArbolB {
     }
     
     public String imprimirGrafico(MetodosArbolB arbol){
-        String arbolstring = "digraph ArbolB{\n";
-        ArrayList<BNode> niv = arbol.recorrer();
-        int saltolinea = 0;
-        int numero = 0;
-        for(BNode nod : niv){
-
-            if(nod.getNivel() != saltolinea){
-                arbolstring += "\n ";
-                saltolinea =  nod.getNivel();
-            }
-            
-            arbolstring += "node"+numero+"[label=\""+nod.getValoresNodo().toString()+"\"];\n";
-            numero++;
-        }
+        String arbolstring = "";
+        arbolstring += graicar(nodo);
         return arbolstring;
+    }
+    
+    public String graicar(BNode actual){
+        String grafica = "";
+         int k = i;
+        if (actual!=null) {
+            grafica += "parent"+i+"[label=<\n<table border='1' cellborder='1'>\n";
+            int j = 0;
+            k=i;
+            grafica+= "<tr>";
+            grafica+= "<td port='port_"+k+""+j+"'>H"+j+"</td>";
+            j++;
+            for (Libro libro:actual.getValoresNodo()) {
+                if (libro!=null) {
+                    grafica+= "<td >ISBN: "+libro.getISBN()+"</td>";
+                    grafica+= "<td port='port_"+k+""+j+"'>H"+j+"</td>";
+                    j++;
+                }
+            }
+            grafica+= "</tr>";
+            grafica+= "</table>\n>];\n";
+            j=0;
+            i++;
+            for (BNode sub:actual.getSubNodos()) {
+                if (sub!=null) {
+                    grafica += "parent"+k+":port_"+k+""+j+" -> parent"+i+";\n";
+                    grafica += graicar(sub);
+                    j++;
+                }
+            }
+        }
+        return grafica;
     }
      
     public ArrayList<BNode> recorrer(){

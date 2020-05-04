@@ -88,7 +88,7 @@ public class LecturaArchivos {
                     if (libros != null) {
                         mavl.insertarLibro(libros, nuevo);
                     }else{
-                        mavl.insert(categoria);
+                        mavl.insert(categoria, carnet);
                         libros = mavl.buscar(categoria);
                         mavl.insertarLibro(libros, nuevo);
                     }

@@ -161,7 +161,7 @@ public void cargaDeDatos(){
         // TODO add your handling code here:
         try{
             String categoria = jTextField1.getText();
-            mavl.insert(categoria);
+            mavl.insert(categoria, usuarioActual.getCarnet());
             if (categoria.equals("")) {
                 
                 JOptionPane.showMessageDialog(null,
@@ -187,7 +187,7 @@ public void cargaDeDatos(){
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         String categoria = jComboBox1.getSelectedItem().toString();
-             mavl.eliminar(categoria);
+             mavl.eliminar(categoria, usuarioActual.getCarnet());
              JOptionPane.showMessageDialog(null,
                 "Se elimino la categoria",
                 "Eliminar Categoria",JOptionPane.INFORMATION_MESSAGE);
