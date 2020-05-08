@@ -21,6 +21,7 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
 /**
  *
  * @author l4kz4
@@ -39,7 +40,6 @@ public class MetodosTablaHash {
     }
     public void insertar(Usuario nuevoUsuario){
         int valorHash = FuncionHash(nuevoUsuario.getCarnet());
-        nuevoUsuario.setPassword(getMD5(nuevoUsuario.getPassword()));
         if (carnets.contains(nuevoUsuario.getCarnet())) {
             JOptionPane.showMessageDialog(null,
                 "El carnet esta repetido",
@@ -48,10 +48,12 @@ public class MetodosTablaHash {
             carnets.add(nuevoUsuario.getCarnet());
             if (tablaHash[valorHash]!=null) {
             tablaHash[valorHash].insertar(nuevoUsuario);
+            cb.crearUsuario(nuevoUsuario);
         }else{
             TablaHashNode nuevoNodo = new TablaHashNode();
             tablaHash[valorHash] = nuevoNodo;
             tablaHash[valorHash].insertar(nuevoUsuario);
+            cb.crearUsuario(nuevoUsuario);
         }
         }
         
@@ -59,7 +61,6 @@ public class MetodosTablaHash {
     
     public Usuario ingresar(int carnet, String password){
         int valorHash = FuncionHash(carnet);
-        password = getMD5(password);
         if (tablaHash[valorHash]!=null) {
             Usuario buscarUsuario = tablaHash[valorHash].ingresar(carnet,password);
             if (buscarUsuario!=null) {

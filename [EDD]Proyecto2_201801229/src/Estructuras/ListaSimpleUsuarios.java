@@ -5,6 +5,9 @@
  */
 package Estructuras;
 import Clases.*;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 /**
  *
  * @author l4kz4
@@ -76,7 +79,7 @@ public class ListaSimpleUsuarios {
         String grafica = "subgraph Usuario"+i+"{\nrankdir=\"LR\";\n node[shape=rect];\n";
         Usuario aux = getInicio();
         while(aux!=null){
-            grafica += aux.getCarnet() +"[label=\"Carnet: "+aux.getCarnet()+"\nNombre: "+aux.getNombre() +" "+aux.getApellido()+"\nCarrera: "+aux.getCarrera()+"\nPassword: "+aux.getPassword()+"\"];\n";
+            grafica += aux.getCarnet() +"[label=\"Carnet: "+aux.getCarnet()+"\nNombre: "+aux.getNombre() +" "+aux.getApellido()+"\nCarrera: "+aux.getCarrera()+"\nPassword: "+getMD5(aux.getPassword())+"\"];\n";
             Usuario aux2 = aux.getSiguiente();
             if (aux2!=null) {
                 grafica+= aux.getCarnet() +" -> "+aux2.getCarnet()+";\n";
@@ -99,5 +102,21 @@ public class ListaSimpleUsuarios {
      */
     public void setInicio(Usuario inicio) {
         this.inicio = inicio;
+    }
+    public static String getMD5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

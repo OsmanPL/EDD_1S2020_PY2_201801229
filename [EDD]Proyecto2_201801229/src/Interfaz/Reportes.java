@@ -10,9 +10,12 @@ import Estructuras.*;
 
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.tablaHash;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author l4kz4
@@ -23,6 +26,7 @@ public class Reportes extends javax.swing.JFrame {
      * Creates new form Reportes
      */
     Usuario usuarioActual = new Usuario();
+
     public Reportes(Usuario actual) {
         initComponents();
         usuarioActual = actual;
@@ -31,14 +35,15 @@ public class Reportes extends javax.swing.JFrame {
         jLabel1.setVisible(false);
     }
 
-     public void cargaItem(){
+    public void cargaItem() {
         ArrayList<String> catalogo = mavl.iniciarCatalogo();
-        for (String categoria:catalogo) {
-            if (categoria!=null) {
+        for (String categoria : catalogo) {
+            if (categoria != null) {
                 jComboBox2.addItem(categoria);
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,8 +60,9 @@ public class Reportes extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -93,16 +99,17 @@ public class Reportes extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Reporte:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 70, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 660, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
         );
 
         pack();
@@ -110,54 +117,62 @@ public class Reportes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Biblioteca bi  = new Biblioteca(usuarioActual);
+        Biblioteca bi = new Biblioteca(usuarioActual);
         bi.setVisible(true);
         this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
-        try{
+        try {
             String categoria = jComboBox1.getSelectedItem().toString();
             if (categoria.equals("Arbol B: Libros")) {
                 jComboBox2.setVisible(true);
                 jLabel1.setVisible(true);
-            }else{
+            } else {
                 jComboBox2.setVisible(false);
                 jLabel1.setVisible(false);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
-                "Error: "+ex,
-                "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+                    "Error: " + ex,
+                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             String categoria = jComboBox1.getSelectedItem().toString();
             if (categoria.equals("Arbol AVL: Categorias")) {
                 mavl.graficarArbol();
-            }else if (categoria.equals("Tabla Hash: Usuarios")) {
+                Image img = new ImageIcon("ArbolAVL.png").getImage();
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                jLabel3.setIcon(img2);
+            } else if (categoria.equals("Tabla Hash: Usuarios")) {
                 tablaHash.graficar();
-            }else if (categoria.equals("Arbol B: Libros")) {
+                Image img = new ImageIcon("TablaHash.png").getImage();
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                jLabel3.setIcon(img2);
+            } else if (categoria.equals("Arbol B: Libros")) {
                 String cat = "";
                 cat = jComboBox2.getSelectedItem().toString();
                 AVLNode ca = mavl.buscar(cat);
-                if (ca!=null) {
-                   mavl.graficarArbolB(ca);
+                if (ca != null) {
+                    mavl.graficarArbolB(ca);
+                    Image img = new ImageIcon("ArbolB.png").getImage();
+                    ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                    jLabel3.setIcon(img2);
                 }
             }
             //Tabla Hash: Usuarios
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
-                "Error: "+ex,
-                "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+                    "Error: " + ex,
+                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -166,6 +181,7 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,9 +11,9 @@ import Clases.*;
 import Estructuras.*;
 import Interfaz.*;
 import Metodos.*;
+import java.io.File;
+import java.sql.Timestamp;
 
-import static edd.proyecto2_201801229.EDDProyecto2_201801229.tablaHash;
-import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
 /**
  *
  * @author l4kz4
@@ -25,9 +25,37 @@ public class EDDProyecto2_201801229 {
      */
     public static MetodosAVL mavl = new MetodosAVL();
     public static MetodosTablaHash tablaHash = new MetodosTablaHash(45);
-    LecturaArchivos ArchivoJson = new LecturaArchivos();
+    public static ListaSimpleNodos red = new ListaSimpleNodos();
+    public static ListaDobleBloques bloques = new ListaDobleBloques();
+    public static NodoRed nodoRed = new NodoRed();
+    public static int indexBloque = 0;
+    public static CrearBloque cb = new CrearBloque();
     public static void main(String[] args) {
+        calularIndex();
         Login login = new Login();
-        login.setVisible(true);
+         login.setVisible(true);
+    }
+
+    public static void calularIndex() {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(timestamp);
+        File carpeta = new File("Bloques");
+        if (carpeta.exists()) {
+            System.out.println("Existe");
+            String[] listado = carpeta.list();
+            if (listado == null || listado.length == 0) {
+                System.out.println("No hay elementos dentro de la carpeta actual");
+                System.out.println("Siguiente Bloque: "+ indexBloque);
+            } else {
+                for (int i = 0; i < listado.length; i++) {
+                    System.out.println(listado[i]);
+                    indexBloque = i+2;
+                }
+                System.out.println("Siguiente Bloque: "+ indexBloque);
+            }
+        } else {
+            System.out.println("No Existe");
+            carpeta.mkdir();
+        }
     }
 }
