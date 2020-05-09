@@ -10,6 +10,10 @@ import Estructuras.*;
 
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.tablaHash;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.bloques;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.red;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.nodoRed;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -74,10 +78,15 @@ public class Reportes extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Arbol AVL: Categorias", "Arbol B: Libros", "Tabla Hash: Usuarios" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Arbol AVL: Categorias", "Arbol B: Libros", "Tabla Hash: Usuarios", "Lista Simple: Nodos", "Lista Doble: Bloques" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 180, -1));
@@ -164,7 +173,18 @@ public class Reportes extends javax.swing.JFrame {
                     ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
                     jLabel3.setIcon(img2);
                 }
+            } else if (categoria.equals("Lista Simple: Nodos")) {
+                red.iniciarGrafica();
+                Image img = new ImageIcon("Nodos.png").getImage();
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                jLabel3.setIcon(img2);
+            } else if (categoria.equals("Lista Doble: Bloques")) {
+                bloques.iniciarGrafica();
+                Image img = new ImageIcon("Bloques.png").getImage();
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                jLabel3.setIcon(img2);
             }
+
             //Tabla Hash: Usuarios
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
@@ -172,6 +192,10 @@ public class Reportes extends javax.swing.JFrame {
                     "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

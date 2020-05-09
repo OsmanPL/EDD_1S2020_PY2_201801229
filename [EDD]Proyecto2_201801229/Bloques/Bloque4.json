@@ -1,0 +1,87 @@
+{
+"INDEX": 4,
+"TIMESTAMP": "2020-05-09 11:56:25.971",
+"NONCE": 8235,
+"DATA": [
+{
+"CREAR_USUARIO": [
+{
+"Carnet": 201503476,
+"Nombre": "Ricardo",
+"Apellido": "Cutz",
+"Carrera": "Ingenieria en Sistemas",
+"Password": "123456",
+},
+{
+"Carnet": 201801210,
+"Nombre": "Alexander",
+"Apellido": "Avalos",
+"Carrera": "Ingenieria en Sistemas",
+"Password": "123456",
+},
+{
+"Carnet": 201801229,
+"Nombre": "Osman",
+"Apellido": "Pérez",
+"Carrera": "Ingenieria en Sistemas",
+"Password": "666",
+},
+{
+"Carnet": 201807335,
+"Nombre": "Juan Diego",
+"Apellido": "Alvarado",
+"Carrera": "Ingenieria en Sistemas",
+"Password": "123456",
+},
+{
+"Carnet": 201807420,
+"Nombre": "David",
+"Apellido": "Diaz",
+"Carrera": "Ingenieria en Sistemas",
+"Password": "123456",
+},
+{
+"Carnet": 201503477,
+"Nombre": "Juanito",
+"Apellido": "Hernandez",
+"Carrera": "Ingenieria Civil",
+"Password": "123456",
+},
+{
+"Carnet": 202005878,
+"Nombre": "Antonio",
+"Apellido": "Hernandez",
+"Carrera": "Ingenieria Electrica",
+"Password": "123456",
+},
+]
+}
+{
+"EDITAR_USUARIO": [
+]
+}
+{
+"ELIMINAR_USUARIO": [
+]
+}
+{
+"CREAR_CATEGORIA": [
+]
+}
+{
+"CREAR_LIBRO": [
+]
+}
+{
+"ELIMINAR_CATEGORIA": [
+]
+}
+{
+"ELIMINAR_LIBRO": [
+]
+}
+],
+
+"PREVIOUSHASH": "0000",
+"HASH": "000051a17a525befaa9ead7b12d30d0b2ea0bdae2f6820620f93332f1f17e3e0",
+}

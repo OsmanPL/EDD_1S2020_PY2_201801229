@@ -6,6 +6,11 @@
 package Estructuras;
 
 import Clases.*;
+import java.awt.Desktop;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.DatagramSocket;
 
 /**
@@ -57,7 +62,48 @@ public class ListaSimpleNodos {
         }
         return null;
     }
-    
+    public void iniciarGrafica(){
+        String grafica = graficar();
+        FileWriter flwriter = null;
+	try {
+            //crea el flujo para escribir en el archivo
+            flwriter = new FileWriter("Nodos.txt");
+            //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
+            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            bfwriter.write(grafica);
+            //cierra el buffer intermedio
+            bfwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+	} finally {
+            if (flwriter != null) {			
+                try {//cierra el flujo principal
+                    flwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        try{       
+            ProcessBuilder pbuilder;
+            String direccionPng = "Nodos.png";
+            String direccionDot = "Nodos.txt";
+            pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o", direccionPng, direccionDot );
+            pbuilder.redirectErrorStream( true );
+            //Ejecuta el proceso
+            pbuilder.start();	 
+	}catch(Exception e) { e.printStackTrace(); }
+        try {
+            String direccionPng = "Nodos.png";
+            File objetofile = new File (direccionPng);
+            Desktop.getDesktop().open(objetofile);
+
+     }catch (IOException ex) {
+
+            System.out.println(ex);
+
+     }
+    }
     public String graficar(){
         String grafica =  "digraph ListaNodos{\nrankdir=\"LR\";\nnode[shape=rect];\n";
         NodoRed aux = inicio;

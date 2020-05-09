@@ -17,6 +17,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.tablaHash;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.bloques;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.red;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.nodoRed;
 /**
  *
  * @author l4kz4
@@ -323,6 +327,8 @@ public class Biblioteca extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         tablaHash.Borrar(usuarioActual.getCarnet());
+        Login lg = new Login();
+        lg.setVisible(true);
         this.hide();
     }//GEN-LAST:event_jButton3ActionPerformed
 

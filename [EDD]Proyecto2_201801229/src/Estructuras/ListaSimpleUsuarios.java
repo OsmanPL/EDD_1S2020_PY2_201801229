@@ -8,6 +8,7 @@ import Clases.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
 /**
  *
  * @author l4kz4
@@ -39,11 +40,14 @@ public class ListaSimpleUsuarios {
         while(aux!=null){
             if (carnetBorrar == aux.getCarnet() && aux == getInicio()) {
                 setInicio(aux.getSiguiente());
+                cb.eliminarUsuario(aux);
+                aux = null;
                 borro = true;
                 break;
             }
             else if (carnetBorrar == aux.getCarnet() && aux != getInicio()) {
                 aux2.setSiguiente(aux.getSiguiente());
+                cb.eliminarUsuario(aux);
                 aux = null;
                 borro = true;
                 break;

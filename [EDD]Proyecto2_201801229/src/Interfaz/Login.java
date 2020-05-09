@@ -17,6 +17,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.tablaHash;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.bloques;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.red;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.nodoRed;
 import java.math.BigInteger;
 import java.security.MessageDigest;

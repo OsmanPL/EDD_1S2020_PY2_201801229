@@ -1,0 +1,23 @@
+digraph ListaBloques{
+rankdir="LR";
+node[shape=rect];
+node6[label="Index: 6
+Timestamp: 2020-05-09 11:59:00.124
+NONCE: 56282
+PreoviousHash: 0000
+Hash: 00004c6d2858b12a38fbb3b7d7dc726bda0c9bb8c8418c51666c1d7d60b03b58"];
+node6 -> node7;
+node7 -> node6;
+node7[label="Index: 7
+Timestamp: 2020-05-09 11:59:27.595
+NONCE: 64835
+PreoviousHash: 00004c6d2858b12a38fbb3b7d7dc726bda0c9bb8c8418c51666c1d7d60b03b58
+Hash: 0000ba075fc2d16df773606a91f6359cef16a2539c33161c2f01dd5a0fd07fa3"];
+node7 -> node8;
+node8 -> node7;
+node8[label="Index: 8
+Timestamp: 2020-05-09 11:59:52.384
+NONCE: 286549
+PreoviousHash: 0000ba075fc2d16df773606a91f6359cef16a2539c33161c2f01dd5a0fd07fa3
+Hash: 000092a54c88ff0995c985891191f142c810ef10367fb179d6139475327b0aae"];
+}

@@ -1,0 +1,42 @@
+{
+"INDEX": 1,
+"TIMESTAMP": "2020-05-09 10:09:23.794",
+"NONCE": 93000,
+"DATA": [
+{
+"CREAR_USUARIO": [
+]
+}
+{
+"EDITAR_USUARIO": [
+]
+}
+{
+"ELIMINAR_USUARIO": [
+]
+}
+{
+"CREAR_CATEGORIA": [
+]
+}
+{
+"CREAR_LIBRO": [
+]
+}
+{
+"ELIMINAR_CATEGORIA": [
+{
+"Nombre": "Informativos",
+"Carnet:": 201801229,
+},
+]
+}
+{
+"ELIMINAR_LIBRO": [
+]
+}
+],
+
+"PREVIOUSHASH": "0000b67587b91432918dab41b7263877c17bd74a5ab3a6b0f267e6a4712868eb",
+"HASH": "0000a48121fb0ca2b0d8d9aaca2016bcc17ee72b17f7ff074c896600c2f43d79",
+}

@@ -58,7 +58,7 @@ subgraph Usuario34{
 rankdir="LR";
  node[shape=rect];
 201801229[label="Carnet: 201801229
-Nombre: Osman Pérez
+Nombre: Osman Pérez López
 Carrera: Ingenieria en Sistemas
 Password: fae0b27c451c728867a567e8c1bb4e53"];
 }

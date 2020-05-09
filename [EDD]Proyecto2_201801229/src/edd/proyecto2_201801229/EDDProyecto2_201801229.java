@@ -32,8 +32,9 @@ public class EDDProyecto2_201801229 {
     public static CrearBloque cb = new CrearBloque();
     public static void main(String[] args) {
         calularIndex();
+        red.insertar(nodoRed);
         Login login = new Login();
-         login.setVisible(true);
+        login.setVisible(true);
     }
 
     public static void calularIndex() {
@@ -49,8 +50,9 @@ public class EDDProyecto2_201801229 {
             } else {
                 for (int i = 0; i < listado.length; i++) {
                     System.out.println(listado[i]);
-                    indexBloque = i+2;
+                    indexBloque = i+1;
                 }
+                
                 System.out.println("Siguiente Bloque: "+ indexBloque);
             }
         } else {

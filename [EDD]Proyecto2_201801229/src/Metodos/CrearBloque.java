@@ -42,6 +42,54 @@ public class CrearBloque {
         crearUsuario += "\"Password\": \"" +nuevo.getPassword() +"\",\n";
         crearUsuario += "},\n";
     }
+    public void EditarUsuario(Usuario nuevo){
+        editarUsuario += "{\n";
+        editarUsuario += "\"Carnet\": " +nuevo.getCarnet() +",\n";
+        editarUsuario += "\"Nombre\": \"" +nuevo.getNombre() +"\",\n";
+        editarUsuario += "\"Apellido\": \"" +nuevo.getApellido() +"\",\n";
+        editarUsuario += "\"Carrera\": \"" +nuevo.getCarrera() +"\",\n";
+        editarUsuario += "\"Password\": \"" +nuevo.getPassword() +"\",\n";
+        editarUsuario += "},\n";
+    }
+    public void eliminarUsuario(Usuario nuevo){
+        eliminarUsuario += "{\n";
+        eliminarUsuario += "\"Carnet\": " +nuevo.getCarnet() +",\n";
+        eliminarUsuario += "\"Password\": \"" +nuevo.getPassword() +"\",\n";
+        eliminarUsuario += "},\n";
+    }
+    public void crearLibro(Libro nuevo){
+        crearLibro += "{\n";
+        crearLibro += "\"ISBN\": "+nuevo.getISBN()+",\n";
+        crearLibro += "\"Año\": "+nuevo.getAño()+",\n";
+        crearLibro += "\"Idioma\": \""+nuevo.getIdioma()+"\",\n";
+        crearLibro += "\"Titulo\": \""+nuevo.getTitulo()+"\",\n";
+        crearLibro += "\"Editorial\": \""+nuevo.getEditorial()+"\",\n";
+        crearLibro += "\"Autor\": \""+nuevo.getAutor()+"\",\n";
+        crearLibro += "\"Edicion\": "+nuevo.getEdicion()+",\n";
+        crearLibro += "\"Categoria\": \""+nuevo.getCategoria()+"\",\n";
+        crearLibro += "\"Carnet\": " +nuevo.getCarnetUsuario()+",\n";
+        crearLibro += "},\n";
+    }
+    public void eliminarLibro(Libro nuevo){
+        eliminarLibro += "{\n";
+        eliminarLibro += "\"ISBN\": "+nuevo.getISBN()+",\n";
+        eliminarLibro += "\"Titulo\": \""+nuevo.getTitulo()+"\",\n";
+        eliminarLibro += "\"Categoria\": \""+nuevo.getCategoria()+"\",\n";
+        eliminarLibro += "\"Carnet\": " +nuevo.getCarnetUsuario()+",\n";
+        eliminarLibro += "},\n";
+    }
+    public void crearCategoria(AVLNode nuevo){
+        crearCategoria += "{\n";
+        crearCategoria += "\"Nombre\": \""+nuevo.getCategoria()+"\",\n";
+        crearCategoria += "\"Carnet:\": "+nuevo.getCarnetUsuario()+",\n";
+        crearCategoria += "},\n";
+    }
+    public void eliminarCategoria(AVLNode nuevo){
+        eliminarCategoria += "{\n";
+        eliminarCategoria += "\"Nombre\": \""+nuevo.getCategoria()+"\",\n";
+        eliminarCategoria += "\"Carnet:\": "+nuevo.getCarnetUsuario()+",\n";
+        eliminarCategoria += "},\n";
+    }
     /**
      * @return the crearUsuario
      */

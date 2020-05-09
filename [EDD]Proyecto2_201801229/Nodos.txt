@@ -1,0 +1,6 @@
+digraph ListaNodos{
+rankdir="LR";
+node[shape=rect];
+node49780[label="IP: localhost/127.0.0.1
+Socket: 49780"];
+}

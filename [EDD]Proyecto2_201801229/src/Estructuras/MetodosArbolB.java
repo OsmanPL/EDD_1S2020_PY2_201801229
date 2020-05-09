@@ -9,7 +9,7 @@ import Clases.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
 /**
  *
  * @author l4kz4
@@ -31,6 +31,7 @@ public class MetodosArbolB {
             
         }else{
              ArbolB.add(Valor);//Se ingresa el valor a la lista con los valores del ArbolB
+             cb.crearLibro(Valor);
             SubNodo sn = nodo.insertar(Valor);//Se ejecuta el metodo insertar del objeto NODO para retornar un subnodo.
             if(sn != null){
                 BNode nuevonodo = new BNode(ordenarbol,sn);
@@ -222,6 +223,7 @@ public class MetodosArbolB {
                         SubNodo Subn;
                         Libro eliminado = new Libro();
                         eliminado = valor;
+                        cb.eliminarLibro(valor);
                         ArbolB.remove(eliminado);
                         for (Libro integer : ArbolB) {
                             Subn = nuevonodo.insertar(integer);

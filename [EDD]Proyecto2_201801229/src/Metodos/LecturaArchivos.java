@@ -112,7 +112,14 @@ public class LecturaArchivos {
         nuevoBloque.setTimestamp(new Timestamp(System.currentTimeMillis()));
         String data = "\"DATA\": [\n";
         data += "{\n\"CREAR_USUARIO\": [\n" + cb.getCrearUsuario() + "]\n}\n";
+        data += "{\n\"EDITAR_USUARIO\": [\n" + cb.getEditarUsuario()+ "]\n}\n";
+        data += "{\n\"ELIMINAR_USUARIO\": [\n" + cb.getEliminarUsuario()+ "]\n}\n";
+        data += "{\n\"CREAR_CATEGORIA\": [\n" + cb.getCrearCategoria()+ "]\n}\n";
+        data += "{\n\"CREAR_LIBRO\": [\n" + cb.getCrearLibro()+ "]\n}\n";
+        data += "{\n\"ELIMINAR_CATEGORIA\": [\n" + cb.getEliminarCategoria()+ "]\n}\n";
+        data += "{\n\"ELIMINAR_LIBRO\": [\n" + cb.getEliminarLibro()+ "]\n}\n";
         data += "],\n";
+        
         nuevoBloque.setData(data);
         bloques.insertar(nuevoBloque);
         FileWriter flwriter = null;
@@ -137,6 +144,7 @@ public class LecturaArchivos {
             }
         }
         cb = new CrearBloque();
+        indexBloque++;
     }
 
     public String bloque(Bloque nuevo) {
