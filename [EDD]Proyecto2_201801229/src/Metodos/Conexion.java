@@ -17,15 +17,15 @@ import java.util.logging.Logger;
  */
 public class Conexion {
 
-    public void enviar(NodoRed inicio, String ruta, NodoRed actual) {
+    public void enviar(NodoRed inicio, String ruta, Nodo actual) {
         NodoRed aux = inicio;
 
         byte[] buffer = new byte[1024];
         while (aux != null) {
-            if (aux != actual) {
+            if (aux.getPuerto() != actual.getSocketUDP().getLocalPort()) {
                 try {
                     buffer = ruta.getBytes();
-                    DatagramPacket respuesta = new DatagramPacket(buffer, buffer.length, aux.getDireccion(), aux.getSocketUDP().getLocalPort());
+                    DatagramPacket respuesta = new DatagramPacket(buffer, buffer.length, actual.getDireccion(), aux.getPuerto());
 
                     actual.getSocketUDP().send(respuesta);
                 } catch (IOException ex) {
@@ -35,5 +35,19 @@ public class Conexion {
             aux = aux.getSiguiente();
         }
 
+    }
+
+    public void conectar(Nodo actual, int puerto) {
+        String conectar = "Conectar";
+        byte[] buffer = new byte[1024];
+        try {
+            buffer = conectar.getBytes();
+            DatagramPacket respuesta = new DatagramPacket(buffer, buffer.length, actual.getDireccion(), puerto);
+
+            actual.getSocketUDP().send(respuesta);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -1,6 +1,11 @@
 digraph ListaNodos{
 rankdir="LR";
 node[shape=rect];
-node49780[label="IP: localhost/127.0.0.1
-Socket: 49780"];
+node61645[label="Socket: 61645"];
+node61645 -> node51914;
+node51914[label="Socket: 51914"];
+node51914 -> node51913;
+node51913[label="Socket: 51913"];
+node51913 -> node51915;
+node51915[label="Socket: 51915"];
 }

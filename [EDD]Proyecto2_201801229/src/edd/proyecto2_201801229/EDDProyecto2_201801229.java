@@ -27,12 +27,15 @@ public class EDDProyecto2_201801229 {
     public static MetodosTablaHash tablaHash = new MetodosTablaHash(45);
     public static ListaSimpleNodos red = new ListaSimpleNodos();
     public static ListaDobleBloques bloques = new ListaDobleBloques();
-    public static NodoRed nodoRed = new NodoRed();
+    public static Nodo nodoRed = new Nodo();
     public static int indexBloque = 0;
     public static CrearBloque cb = new CrearBloque();
     public static void main(String[] args) {
         calularIndex();
-        red.insertar(nodoRed);
+        nodoRed.start();
+        NodoRed nodo = new NodoRed();
+        nodo.setPuerto(nodoRed.getSocketUDP().getLocalPort());
+        red.insertar(nodo);
         Login login = new Login();
         login.setVisible(true);
     }

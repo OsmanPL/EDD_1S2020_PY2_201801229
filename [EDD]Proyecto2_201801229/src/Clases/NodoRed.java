@@ -14,68 +14,24 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.tablaHash;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.bloques;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.red;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.nodoRed;
 /**
  *
  * @author l4kz4
  */
 public class NodoRed extends Thread {
 
-    private InetAddress direccion;
-    private DatagramSocket socketUDP;
+    private int puerto;
     private NodoRed siguiente;
 
     public NodoRed() {
-        try {
-            direccion = InetAddress.getByName("localhost");
-            socketUDP = new DatagramSocket();
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(NodoRed.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SocketException ex) {
-            Logger.getLogger(NodoRed.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
-
-    public void run() {
-        byte[] buffer = new byte[1024];
-        while (true) {
-            try {
-                DatagramPacket peticion = new DatagramPacket(buffer, buffer.length);
-                socketUDP.receive(peticion);
-                
-            } catch (IOException ex) {
-                Logger.getLogger(NodoRed.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    /**
-     * @return the direccion
-     */
-    public InetAddress getDireccion() {
-        return direccion;
-    }
-
-    /**
-     * @param direccion the direccion to set
-     */
-    public void setDireccion(InetAddress direccion) {
-        this.direccion = direccion;
-    }
-
-    /**
-     * @return the socketUDP
-     */
-    public DatagramSocket getSocketUDP() {
-        return socketUDP;
-    }
-
-    /**
-     * @param socketUDP the socketUDP to set
-     */
-    public void setSocketUDP(DatagramSocket socketUDP) {
-        this.socketUDP = socketUDP;
-    }
-
     /**
      * @return the siguiente
      */
@@ -88,6 +44,20 @@ public class NodoRed extends Thread {
      */
     public void setSiguiente(NodoRed siguiente) {
         this.siguiente = siguiente;
+    }
+
+    /**
+     * @return the puerto
+     */
+    public int getPuerto() {
+        return puerto;
+    }
+
+    /**
+     * @param puerto the puerto to set
+     */
+    public void setPuerto(int puerto) {
+        this.puerto = puerto;
     }
 
 }

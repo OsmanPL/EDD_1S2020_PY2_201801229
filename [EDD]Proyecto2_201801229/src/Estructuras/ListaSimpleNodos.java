@@ -53,10 +53,10 @@ public class ListaSimpleNodos {
         }
     }
     
-    public NodoRed buscar(DatagramSocket socketUDP){
+    public NodoRed buscar(int puerto){
         NodoRed aux = inicio;
         while(aux!=null){
-            if (aux.getSocketUDP() == socketUDP) {
+            if (aux.getPuerto()== puerto) {
                 return aux;
             }
         }
@@ -108,10 +108,9 @@ public class ListaSimpleNodos {
         String grafica =  "digraph ListaNodos{\nrankdir=\"LR\";\nnode[shape=rect];\n";
         NodoRed aux = inicio;
         while(aux!=null){
-            grafica += "node"+aux.getSocketUDP().getLocalPort()+"[label=\"IP: "+aux.getDireccion()
-                    +"\nSocket: "+aux.getSocketUDP().getLocalPort()+ "\"];\n";
+            grafica += "node"+aux.getPuerto()+"[label=\"Socket: "+aux.getPuerto()+ "\"];\n";
             if (aux.getSiguiente()!=null) {
-                grafica += "node"+aux.getSocketUDP().getLocalPort()+" -> node"+aux.getSiguiente().getSocketUDP().getLocalPort()+";\n";
+                grafica += "node"+aux.getPuerto()+" -> node"+aux.getSiguiente().getPuerto()+";\n";
             }
             aux = aux.getSiguiente();
         }
