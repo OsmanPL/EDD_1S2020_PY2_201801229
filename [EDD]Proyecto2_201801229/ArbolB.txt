@@ -1,0 +1,7 @@
+digraph ArbolB{
+ node[shape=rect];
+parent1[label=<
+<table border='1' cellborder='1'>
+<tr><td port='port_10'>H0</td><td ><table cellspacing='0'><tr><td>ISBN: 10787</td></tr><tr><td>Titulo: La nueva imagen del hombre común</td></tr><tr><td>Autor: ESCOLAR BAREÑO, LUIS</td></tr><tr><td>Editorail: A. AL. BURT</td></tr><tr><td>Año: 1957</td></tr><tr><td>Edicion: 3</td></tr><tr><td>Categoria: Biografia</td></tr><tr><td>Idioma: Español</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_11'>H1</td><td ><table cellspacing='0'><tr><td>ISBN: 10850</td></tr><tr><td>Titulo: Historia de la provincia de San Vicente de Chiapa y Guatemala de la orden de Predicadores</td></tr><tr><td>Autor: ESPAÑA AYALA, JUAN ANTONIO</td></tr><tr><td>Editorail: Academia de Geografía e Historia de Costa Rica</td></tr><tr><td>Año: 1999</td></tr><tr><td>Edicion: 8</td></tr><tr><td>Categoria: Biografia</td></tr><tr><td>Idioma: Aleman</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_12'>H2</td><td ><table cellspacing='0'><tr><td>ISBN: 10935</td></tr><tr><td>Titulo: Política. Figuras. Paisajes</td></tr><tr><td>Autor: ESPINOSA PÓLIT, AURELIO</td></tr><tr><td>Editorail: Actar</td></tr><tr><td>Año: 1927</td></tr><tr><td>Edicion: 1</td></tr><tr><td>Categoria: Biografia</td></tr><tr><td>Idioma: Español</td></tr><tr><td>Carnet Usuario: 201801229</td></tr></table></td><td port='port_13'>H3</td></tr></table>
+>];
+}

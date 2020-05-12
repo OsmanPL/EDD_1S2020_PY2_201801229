@@ -1,0 +1,4 @@
+digraph ListaBloques{
+rankdir="LR";
+node[shape=rect];
+}

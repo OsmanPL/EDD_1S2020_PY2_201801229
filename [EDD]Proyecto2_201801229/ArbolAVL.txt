@@ -1,0 +1,41 @@
+digraph ArbolAVL{
+Informativos [label="Informativos
+Libros: 18
+Carnet: 201801229  "];
+Informativos->Consulta;
+Consulta [label="Consulta
+Libros: 12
+Carnet: 201801229  "];
+Consulta->Biografia;
+Biografia [label="Biografia
+Libros: 3
+Carnet: 201801229  "];
+Consulta->Ensayo;
+Ensayo [label="Ensayo
+Libros: 12
+Carnet: 201801229  "];
+Ensayo->Drama;
+Drama [label="Drama
+Libros: 16
+Carnet: 201801229  "];
+Ensayo->Epico;
+Epico [label="Epico
+Libros: 8
+Carnet: 201801229  "];
+Informativos->Lírico;
+Lírico [label="Lírico
+Libros: 13
+Carnet: 201801229  "];
+Lírico->Literatura;
+Literatura [label="Literatura
+Libros: 9
+Carnet: 201801229  "];
+Lírico->Revista;
+Revista [label="Revista
+Libros: 6
+Carnet: 201801229  "];
+Revista->Sagas;
+Sagas [label="Sagas
+Libros: 2
+Carnet: 201801229  "];
+}

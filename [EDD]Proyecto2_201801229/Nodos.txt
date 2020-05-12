@@ -1,0 +1,5 @@
+digraph ListaNodos{
+rankdir="LR";
+node[shape=rect];
+node58834[label="Socket: 58834"];
+}

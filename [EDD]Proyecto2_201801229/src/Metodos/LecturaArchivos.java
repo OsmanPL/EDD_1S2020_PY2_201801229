@@ -24,12 +24,17 @@ import static edd.proyecto2_201801229.EDDProyecto2_201801229.indexBloque;
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,7 +48,7 @@ public class LecturaArchivos {
     public void leerUsuarios(String ruta) {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject archivoUsers = (JSONObject) parser.parse(new FileReader(ruta));
+            JSONObject archivoUsers = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(ruta), "UTF-8"));
             JSONArray usuarios = (JSONArray) archivoUsers.get("Usuarios");
             for (Object obj : usuarios) {
                 if (obj != null) {
@@ -59,26 +64,29 @@ public class LecturaArchivos {
                     tablaHash.insertar(nuevoUsuario);
                 }
             }
+            JOptionPane.showMessageDialog(null,"Archivo de Usuarios Leido Correctamente",
+                "Usuarios",JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
 
             System.out.println("Error Lectura de archivo usuarios: " + ex.toString());
+            JOptionPane.showMessageDialog(null,"Archivo de Usuarios no ha sido leido \nError: "+ex.toString() ,
+                "Usuarios",JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     public void leerLibros(String ruta, int carnet) {
         try {
-            // try{
-            int i = 1;
+            
             JSONParser parser = new JSONParser();
             JSONObject archivoUsers = new JSONObject();
-            archivoUsers = (JSONObject) parser.parse(new FileReader(ruta));
-            
+            archivoUsers = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(ruta), "UTF-8"));
             JSONArray librosArchivo = (JSONArray) archivoUsers.get("libros");
             for (Object obj : librosArchivo) {
                 if (obj != null) {
                     JSONObject libro = (JSONObject) obj;
                     Long isbn = new Long((long) libro.get("ISBN"));
                     int ISBN = isbn.intValue();
+                    String an = new String();
                     Long anio = new Long((long) libro.get("Año"));
                     int año = anio.intValue();
                     String idioma = (String) libro.get("Idioma");
@@ -88,7 +96,6 @@ public class LecturaArchivos {
                     Long edic = new Long((long) libro.get("Edicion"));
                     int edicion = edic.intValue();
                     String categoria = (String) libro.get("Categoria");
-                    
                     Libro nuevo = new Libro(ISBN, carnet, año, autor, titulo, editorial, edicion, categoria, idioma);
                     
                     AVLNode libros = mavl.buscar(categoria);
@@ -101,18 +108,18 @@ public class LecturaArchivos {
                     }
                 }
             }
-            
-        } catch (IOException ex) {
-            Logger.getLogger(LecturaArchivos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(LecturaArchivos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Archivo de Libros Leido Correctamente",
+                "Libros",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Archivo de Libros no ha sido leido \nError: "+ex.toString() ,
+                "Usuarios",JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     public void leerBloque(String ruta) {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject archivo = (JSONObject) parser.parse(new FileReader(ruta));
+            JSONObject archivo = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(ruta), "UTF-8"));
             Long indexLong = new Long((long) archivo.get("INDEX"));
             int index = indexLong.intValue();
             Timestamp time = new Timestamp(System.currentTimeMillis());
@@ -120,8 +127,7 @@ public class LecturaArchivos {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                 Date parsedDate = dateFormat.parse((String) archivo.get("TIMESTAMP"));
                 time = new java.sql.Timestamp(parsedDate.getTime());
-            } catch (Exception e) { //this generic but you can control another types of exception
-                // look the origin of excption 
+            } catch (Exception e) {
             }
             Long nonceLong = new Long((long) archivo.get("NONCE"));
             long nonce = (long) nonceLong;
@@ -320,27 +326,13 @@ public class LecturaArchivos {
 
         nuevoBloque.setData(data);
         bloques.insertar(nuevoBloque);
-        FileWriter flwriter = null;
         try {
-            //crea el flujo para escribir en el archivo
-            flwriter = new FileWriter("Bloques/Bloque" + indexBloque + ".json");
-            //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
-            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Bloques/Bloque" + indexBloque + ".json"), "utf-8"));
             String grafica = "{\n" + bloque(bloques.getPrimero()) + "}\n";
             bfwriter.write(grafica);
-            //cierra el buffer intermedio
             bfwriter.close();
-            flwriter.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (flwriter != null) {
-                try {//cierra el flujo principal
-                    flwriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         nodoRed.enviar(red.getInicio(), "Bloques/Bloque" + indexBloque + ".json");
         cb = new CrearBloque();
