@@ -27,11 +27,12 @@ public class EDDProyecto2_201801229 {
     public static MetodosTablaHash tablaHash = new MetodosTablaHash(45);
     public static ListaSimpleNodos red = new ListaSimpleNodos();
     public static ListaDobleBloques bloques = new ListaDobleBloques();
-    public static Nodo nodoRed = new Nodo();
+    public static Nodo nodoRed;
     public static int indexBloque = 0;
     public static CrearBloque cb = new CrearBloque();
     public static void main(String[] args) {
         calularIndex();
+        nodoRed = new Nodo();
         nodoRed.start();
         NodoRed nodo = new NodoRed();
         nodo.setPuerto(nodoRed.getSocketUDP().getLocalPort());
@@ -49,10 +50,11 @@ public class EDDProyecto2_201801229 {
             String[] listado = carpeta.list();
             if (listado == null || listado.length == 0) {
                 System.out.println("No hay elementos dentro de la carpeta actual");
-                System.out.println("Siguiente Bloque: "+ indexBloque);
             } else {
                 for (int i = 0; i < listado.length; i++) {
                     System.out.println(listado[i]);
+                    LecturaArchivos la = new LecturaArchivos();
+                    la.leerBloque("Bloques/"+listado[i]);
                     indexBloque = i+1;
                 }
                 

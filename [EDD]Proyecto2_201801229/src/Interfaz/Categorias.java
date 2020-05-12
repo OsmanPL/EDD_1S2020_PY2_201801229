@@ -30,6 +30,7 @@ public class Categorias extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     Usuario usuarioActual = new Usuario();
     ArrayList<AVLNode> libros = new ArrayList<AVLNode>();
+
     public Categorias(Usuario actual) {
         initComponents();
         usuarioActual = actual;
@@ -37,30 +38,32 @@ public class Categorias extends javax.swing.JFrame {
         cargaDeDatos();
         cargaItem();
     }
-public void cargaDeDatos(){
+
+    public void cargaDeDatos() {
         model = new DefaultTableModel();
         model.addColumn("Categoria");
         model.addColumn("Libros");
-        
-        for (AVLNode libro:libros) {
-            if (libro!=null) {
-                Object[] dato = new Object[]{libro.getCategoria(),libro.getArbolB().getArbolB().size()};
+
+        for (AVLNode libro : libros) {
+            if (libro != null) {
+                Object[] dato = new Object[]{libro.getCategoria(), libro.getArbolB().getArbolB().size()};
                 model.addRow(dato);
             }
         }
-        
+
         jTable1.setModel(model);
     }
-    
-    public void cargaItem(){
+
+    public void cargaItem() {
         jComboBox1.removeAllItems();
         ArrayList<String> catalogo = mavl.iniciarCatalogo();
-        for (String categoria:catalogo) {
-            if (categoria!=null) {
+        for (String categoria : catalogo) {
+            if (categoria != null) {
                 jComboBox1.addItem(categoria);
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,56 +160,51 @@ public void cargaDeDatos(){
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Biblioteca bi  = new Biblioteca(usuarioActual);
+        Biblioteca bi = new Biblioteca(usuarioActual);
         bi.setVisible(true);
         this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             String categoria = jTextField1.getText();
             mavl.insert(categoria, usuarioActual.getCarnet());
             if (categoria.equals("")) {
-                
+
                 JOptionPane.showMessageDialog(null,
-                "Lllenar el campo de categoria nueva",
-                "Caegoria",JOptionPane.ERROR_MESSAGE);
-            }else{
-                
+                        "Lllenar el campo de categoria nueva",
+                        "Caegoria", JOptionPane.ERROR_MESSAGE);
+            } else {
+
                 JOptionPane.showMessageDialog(null,
-                "Categoria creada exitosamente",
-                "Caegoria Nueva",JOptionPane.INFORMATION_MESSAGE);
+                        "Categoria creada exitosamente",
+                        "Caegoria Nueva", JOptionPane.INFORMATION_MESSAGE);
                 libros = mavl.devolverArbol();
-            
+
                 cargaDeDatos();
                 cargaItem();
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
-                "Error: "+ex,
-                "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+                    "Error: " + ex,
+                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
         }
+        jTextField1.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         String categoria = jComboBox1.getSelectedItem().toString();
-             mavl.eliminar(categoria, usuarioActual.getCarnet());
-             JOptionPane.showMessageDialog(null,
+        mavl.eliminar(categoria, usuarioActual.getCarnet());
+        JOptionPane.showMessageDialog(null,
                 "Se elimino la categoria",
-                "Eliminar Categoria",JOptionPane.INFORMATION_MESSAGE);
-             libros = mavl.devolverArbol();
-            
-                cargaDeDatos();
-                cargaItem();
-        /*try{
-             
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null,
-                "Error: "+ex,
-                "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
-        }*/
+                "Eliminar Categoria", JOptionPane.INFORMATION_MESSAGE);
+        libros = mavl.devolverArbol();
+
+        cargaDeDatos();
+        cargaItem();
+        jTextField1.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

@@ -197,6 +197,11 @@ public class Biblioteca extends javax.swing.JFrame {
         jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, 180, 40));
 
         jButton10.setText("Sincronizar");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 180, 40));
 
         jButton11.setText("Categorias");
@@ -345,6 +350,12 @@ public class Biblioteca extends javax.swing.JFrame {
         cat.setVisible(true);
         this.hide();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        LecturaArchivos lc = new LecturaArchivos();
+        lc.escribirBloque();
+    }//GEN-LAST:event_jButton10ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

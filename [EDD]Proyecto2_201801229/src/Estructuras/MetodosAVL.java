@@ -23,6 +23,7 @@ public class MetodosAVL {
 
     AVLNode raiz;
     ArrayList<Integer> isbn = new ArrayList<Integer>();
+    boolean s = true;
 
     public void insert(String categoria, int carnet) {
         raiz = insertar(raiz, categoria, carnet);
@@ -75,6 +76,7 @@ public class MetodosAVL {
         if (actual != null) {
             Libro retornar = actual.getArbolB().eliminar(ISBN, carnet);
             if (retornar != null) {
+                isbn.remove((Object) retornar.getISBN());
                 return retornar;
             } else {
                 if (actual.getHi() != null && retornar == null) {
@@ -82,6 +84,9 @@ public class MetodosAVL {
                 }
                 if (actual.getHd() != null && retornar == null) {
                     retornar = eliminar(actual.getHd(), ISBN, carnet);
+                }
+                if (retornar != null) {
+                    isbn.remove((Object) retornar.getISBN());
                 }
                 return retornar;
             }
@@ -267,6 +272,7 @@ public class MetodosAVL {
     }
 
     public void eliminar(String categoria, int carnet) {
+        s = true;
         raiz = delete(raiz, categoria, carnet);
     }
 
@@ -297,7 +303,11 @@ public class MetodosAVL {
                         }
                     }
                     isbn.removeAll(eliminados);
-                    cb.eliminarCategoria(root);
+                    if (s) {
+                        cb.eliminarCategoria(root);
+                        s = false;
+                    }
+
                     root = null;
                 } else {
                     ArrayList<Integer> eliminados = new ArrayList<Integer>();
@@ -308,7 +318,10 @@ public class MetodosAVL {
                         }
                     }
                     isbn.removeAll(eliminados);
-                    cb.eliminarCategoria(root);
+                    if (s) {
+                        cb.eliminarCategoria(root);
+                        s = false;
+                    }
                     root = temp;
                 }
             } else {
@@ -321,7 +334,10 @@ public class MetodosAVL {
                     }
                 }
                 isbn.removeAll(eliminados);
-                cb.eliminarCategoria(root);
+                if (s) {
+                    cb.eliminarCategoria(root);
+                    s = false;
+                }
                 root.setCategoria(temp.getCategoria());
                 root.setArbolB(temp.getArbolB());
                 root.setCarnetUsuario(temp.getCarnetUsuario());

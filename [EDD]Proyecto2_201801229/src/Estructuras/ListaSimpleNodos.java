@@ -30,42 +30,51 @@ public class ListaSimpleNodos {
 
     public void insertar(NodoRed nuevo) {
         if (listaVacia()) {
-            setInicio(nuevo);
+            inicio = nuevo;
         } else {
-            nuevo.setSiguiente(getInicio());
-            setInicio(nuevo);
+            nuevo.setSiguiente(inicio);
+            inicio = nuevo;
         }
     }
-    
-    public void eliminar(NodoRed borrar){
+
+    public void eliminar(NodoRed borrar) {
         NodoRed aux1 = inicio;
         NodoRed aux2 = inicio;
-        if (aux1!=null) {
-            if (aux1 == borrar && aux1!=inicio) {
-                aux2.setSiguiente(aux1.getSiguiente());
-                aux1 = null;
-            }else if (aux1==borrar && aux1==inicio) {
-                inicio = null;
+        while (aux1 != null) {
+            if (aux1.getPuerto() == borrar.getPuerto()) {
+                if (aux1.getPuerto() != inicio.getPuerto()) {
+                    aux2.setSiguiente(aux1.getSiguiente());
+                    aux1 = null;
+                    break;
+                } else {
+                    if (aux1.getSiguiente() != null) {
+                        inicio = aux1.getSiguiente();
+                    } else {
+                        inicio = null;
+                    }
+                }
+                break;
             }
-            
             aux2 = aux1;
             aux1 = aux1.getSiguiente();
         }
     }
-    
-    public NodoRed buscar(int puerto){
+
+    public NodoRed buscar(int puerto) {
         NodoRed aux = inicio;
-        while(aux!=null){
-            if (aux.getPuerto()== puerto) {
+        while (aux != null) {
+            if (aux.getPuerto() == puerto) {
                 return aux;
             }
+            aux = aux.getSiguiente();
         }
         return null;
     }
-    public void iniciarGrafica(){
+
+    public void iniciarGrafica() {
         String grafica = graficar();
         FileWriter flwriter = null;
-	try {
+        try {
             //crea el flujo para escribir en el archivo
             flwriter = new FileWriter("Nodos.txt");
             //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
@@ -75,8 +84,8 @@ public class ListaSimpleNodos {
             bfwriter.close();
         } catch (IOException e) {
             e.printStackTrace();
-	} finally {
-            if (flwriter != null) {			
+        } finally {
+            if (flwriter != null) {
                 try {//cierra el flujo principal
                     flwriter.close();
                 } catch (IOException e) {
@@ -84,40 +93,43 @@ public class ListaSimpleNodos {
                 }
             }
         }
-        try{       
+        try {
             ProcessBuilder pbuilder;
             String direccionPng = "Nodos.png";
             String direccionDot = "Nodos.txt";
-            pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o", direccionPng, direccionDot );
-            pbuilder.redirectErrorStream( true );
+            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", direccionPng, direccionDot);
+            pbuilder.redirectErrorStream(true);
             //Ejecuta el proceso
-            pbuilder.start();	 
-	}catch(Exception e) { e.printStackTrace(); }
+            pbuilder.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             String direccionPng = "Nodos.png";
-            File objetofile = new File (direccionPng);
+            File objetofile = new File(direccionPng);
             Desktop.getDesktop().open(objetofile);
 
-     }catch (IOException ex) {
+        } catch (IOException ex) {
 
             System.out.println(ex);
 
-     }
+        }
     }
-    public String graficar(){
-        String grafica =  "digraph ListaNodos{\nrankdir=\"LR\";\nnode[shape=rect];\n";
+
+    public String graficar() {
+        String grafica = "digraph ListaNodos{\nrankdir=\"LR\";\nnode[shape=rect];\n";
         NodoRed aux = inicio;
-        while(aux!=null){
-            grafica += "node"+aux.getPuerto()+"[label=\"Socket: "+aux.getPuerto()+ "\"];\n";
-            if (aux.getSiguiente()!=null) {
-                grafica += "node"+aux.getPuerto()+" -> node"+aux.getSiguiente().getPuerto()+";\n";
+        while (aux != null) {
+            grafica += "node" + aux.getPuerto() + "[label=\"Socket: " + aux.getPuerto() + "\"];\n";
+            if (aux.getSiguiente() != null) {
+                grafica += "node" + aux.getPuerto() + " -> node" + aux.getSiguiente().getPuerto() + ";\n";
             }
             aux = aux.getSiguiente();
         }
         grafica += "}";
         return grafica;
     }
-    
+
     /**
      * @return the inicio
      */
@@ -131,6 +143,5 @@ public class ListaSimpleNodos {
     public void setInicio(NodoRed inicio) {
         this.inicio = inicio;
     }
-    
-    
+
 }

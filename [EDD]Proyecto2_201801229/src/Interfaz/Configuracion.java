@@ -86,9 +86,8 @@ public class Configuracion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Conexion conexion = new Conexion();
         int puerto = Integer.parseInt(jTextField1.getText());
-        conexion.conectar(nodoRed, puerto);
+        nodoRed.conectar(puerto);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

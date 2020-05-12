@@ -39,34 +39,38 @@ public class ListaDobleBloques {
 
     public void insertar(Bloque nuevo) {
         if (listaVacia()) {
-            nuevo.setPrevioushash("0000");
-            nuevo.setNONCE(0);
-            try {
-                nuevo.setHash(toHexString(getSHA("" + nuevo.getIndex() + nuevo.getTimestamp() + nuevo.getPrevioushash() + nuevo.getData() + nuevo.getNONCE())));
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.println(nuevo.getHash());
-            while (!nuevo.getHash().startsWith("0000")) {
-                nuevo.setNONCE(nuevo.getNONCE() + 1);
+            if (nuevo.getPrevioushash() == null) {
+                nuevo.setPrevioushash("0000");
+                nuevo.setNONCE(0);
                 try {
                     nuevo.setHash(toHexString(getSHA("" + nuevo.getIndex() + nuevo.getTimestamp() + nuevo.getPrevioushash() + nuevo.getData() + nuevo.getNONCE())));
                 } catch (NoSuchAlgorithmException ex) {
                     Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println(nuevo.getHash());
+                while (!nuevo.getHash().startsWith("0000")) {
+                    nuevo.setNONCE(nuevo.getNONCE() + 1);
+                    try {
+                        nuevo.setHash(toHexString(getSHA("" + nuevo.getIndex() + nuevo.getTimestamp() + nuevo.getPrevioushash() + nuevo.getData() + nuevo.getNONCE())));
+                    } catch (NoSuchAlgorithmException ex) {
+                        Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    System.out.println(nuevo.getHash());
+                }
             }
             setPrimero(nuevo);
             setUltimo(nuevo);
         } else {
-            nuevo.setPrevioushash(getPrimero().getHash());
-            nuevo.setNONCE(0);
-            nuevo.setHash(sha256("" + nuevo.getIndex() + nuevo.getTimestamp() + nuevo.getPrevioushash() + nuevo.getData() + nuevo.getNONCE()));
-            System.out.println(nuevo.getHash());
-            while (!nuevo.getHash().startsWith("0000")) {
-                nuevo.setNONCE(nuevo.getNONCE() + 1);
+            if (nuevo.getPrevioushash() == null) {
+                nuevo.setPrevioushash(getPrimero().getHash());
+                nuevo.setNONCE(0);
                 nuevo.setHash(sha256("" + nuevo.getIndex() + nuevo.getTimestamp() + nuevo.getPrevioushash() + nuevo.getData() + nuevo.getNONCE()));
                 System.out.println(nuevo.getHash());
+                while (!nuevo.getHash().startsWith("0000")) {
+                    nuevo.setNONCE(nuevo.getNONCE() + 1);
+                    nuevo.setHash(sha256("" + nuevo.getIndex() + nuevo.getTimestamp() + nuevo.getPrevioushash() + nuevo.getData() + nuevo.getNONCE()));
+                    System.out.println(nuevo.getHash());
+                }
             }
             nuevo.setSiguiente(getPrimero());
             getPrimero().setAnterior(nuevo);
@@ -116,10 +120,11 @@ public class ListaDobleBloques {
 
         return hexString.toString();
     }
-    public void iniciarGrafica(){
+
+    public void iniciarGrafica() {
         String grafica = grafica();
         FileWriter flwriter = null;
-	try {
+        try {
             //crea el flujo para escribir en el archivo
             flwriter = new FileWriter("Bloques.txt");
             //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
@@ -129,8 +134,8 @@ public class ListaDobleBloques {
             bfwriter.close();
         } catch (IOException e) {
             e.printStackTrace();
-	} finally {
-            if (flwriter != null) {			
+        } finally {
+            if (flwriter != null) {
                 try {//cierra el flujo principal
                     flwriter.close();
                 } catch (IOException e) {
@@ -138,41 +143,45 @@ public class ListaDobleBloques {
                 }
             }
         }
-        try{       
+        try {
             ProcessBuilder pbuilder;
             String direccionPng = "Bloques.png";
             String direccionDot = "Bloques.txt";
-            pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o", direccionPng, direccionDot );
-            pbuilder.redirectErrorStream( true );
+            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", direccionPng, direccionDot);
+            pbuilder.redirectErrorStream(true);
             //Ejecuta el proceso
-            pbuilder.start();	 
-	}catch(Exception e) { e.printStackTrace(); }
+            pbuilder.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             String direccionPng = "Bloques.png";
-            File objetofile = new File (direccionPng);
+            File objetofile = new File(direccionPng);
             Desktop.getDesktop().open(objetofile);
 
-     }catch (IOException ex) {
+        } catch (IOException ex) {
 
             System.out.println(ex);
 
-     }
+        }
     }
-    public String grafica(){
+
+    public String grafica() {
         String grafica = "digraph ListaBloques{\nrankdir=\"LR\";\nnode[shape=rect];\n";
         Bloque aux = ultimo;
-        while(aux!=null){
-            grafica+="node"+aux.getIndex()+"[label=\"Index: "+aux.getIndex()+"\nTimestamp: "+aux.getTimestamp()
-                    +"\nNONCE: "+aux.getNONCE()+"\nPreoviousHash: "+aux.getPrevioushash()+"\nHash: "+aux.getHash()+"\"];\n";
-            if (aux.getAnterior()!=null) {
-                grafica+= "node"+aux.getIndex()+" -> node"+aux.getAnterior().getIndex()+";\n";
-                grafica += "node"+aux.getAnterior().getIndex()+" -> node"+aux.getIndex()+";\n";
+        while (aux != null) {
+            grafica += "node" + aux.getIndex() + "[label=\"Index: " + aux.getIndex() + "\nTimestamp: " + aux.getTimestamp()
+                    + "\nNONCE: " + aux.getNONCE() + "\nPreoviousHash: " + aux.getPrevioushash() + "\nHash: " + aux.getHash() + "\"];\n";
+            if (aux.getAnterior() != null && aux.getAnterior().getIndex()!= aux.getIndex()) {
+                grafica += "node" + aux.getIndex() + " -> node" + aux.getAnterior().getIndex() + ";\n";
+                grafica += "node" + aux.getAnterior().getIndex() + " -> node" + aux.getIndex() + ";\n";
             }
             aux = aux.getAnterior();
         }
         grafica += "}\n";
         return grafica;
     }
+
     /**
      * @return the primero
      */

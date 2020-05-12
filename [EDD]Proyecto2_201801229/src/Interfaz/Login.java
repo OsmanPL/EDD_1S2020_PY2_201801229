@@ -24,6 +24,9 @@ import static edd.proyecto2_201801229.EDDProyecto2_201801229.nodoRed;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author l4kz4
@@ -35,7 +38,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        jLabel3.setText("IP: "+nodoRed.getDireccion());
+        jLabel3.setText("IP: " + nodoRed.getDireccion());
         jLabel4.setText("Socket: " + nodoRed.getSocketUDP().getLocalPort());
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -107,7 +110,7 @@ public class Login extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
         jButton5.setText("Salir");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -147,74 +150,71 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         Registrarse rg = new Registrarse();
         rg.setVisible(true);
         this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String aux="";
-        String texto="";
-        try
-        {
-            /**llamamos el metodo que permite cargar la ventana*/
-            JFileChooser file=new JFileChooser();
-            FileNameExtensionFilter filtro=new FileNameExtensionFilter("JSON","json");
+        String aux = "";
+        String texto = "";
+        try {
+            /**
+             * llamamos el metodo que permite cargar la ventana
+             */
+            JFileChooser file = new JFileChooser();
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("JSON", "json");
             file.setFileFilter(filtro);
             file.showOpenDialog(this);
-            File abre=file.getSelectedFile();
-            
+            File abre = file.getSelectedFile();
+
             System.out.println(abre.getAbsolutePath());
-            
-        LecturaArchivos users = new LecturaArchivos();
-        users.leerUsuarios(abre.getAbsolutePath());
-            if(abre!=null)
-            {
-                FileReader archivos=new FileReader(abre);
-                BufferedReader lee=new BufferedReader(archivos);
-                while((aux=lee.readLine())!=null)
-                {
-                    texto+= aux+ "\n";
+
+            LecturaArchivos users = new LecturaArchivos();
+            users.leerUsuarios(abre.getAbsolutePath());
+            if (abre != null) {
+                FileReader archivos = new FileReader(abre);
+                BufferedReader lee = new BufferedReader(archivos);
+                while ((aux = lee.readLine()) != null) {
+                    texto += aux + "\n";
                 }
                 lee.close();
             }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex + ""
+                    + "\nNo se ha encontrado el archivo",
+                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
         }
-        catch(IOException ex)
-        {
-            JOptionPane.showMessageDialog(null,ex+"" +
-                "\nNo se ha encontrado el archivo",
-                "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
-        }
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             int carnet = Integer.parseInt(jTextField1.getText());
             String password = jPasswordField1.getText();
-            
+
             Usuario buscar = tablaHash.ingresar(carnet, password);
-            if (buscar!=null) {
-                JOptionPane.showMessageDialog(null,"Usuario Existente"
-                +"\nCarnet: "+buscar.getCarnet() 
-                +"\nNombre: "+buscar.getNombre()
-                +"\nApellido: "+buscar.getApellido()
-                +"\nCarrera: "+buscar.getCarrera()
-                +"\nPassword: "+getMD5(buscar.getPassword()),
-                "",JOptionPane.INFORMATION_MESSAGE);
+            if (buscar != null) {
+                JOptionPane.showMessageDialog(null, "Usuario Existente"
+                        + "\nCarnet: " + buscar.getCarnet()
+                        + "\nNombre: " + buscar.getNombre()
+                        + "\nApellido: " + buscar.getApellido()
+                        + "\nCarrera: " + buscar.getCarrera()
+                        + "\nPassword: " + getMD5(buscar.getPassword()),
+                        "", JOptionPane.INFORMATION_MESSAGE);
                 Biblioteca biblio = new Biblioteca(buscar);
                 biblio.setVisible(true);
                 this.hide();
-            }else{
-                JOptionPane.showMessageDialog(null,"El Usuario no Existe",
-                "Error",JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "El Usuario no Existe",
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null,ex+"" +
-                "\nErro",
-                "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ""
+                    + "\nErro",
+                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
         }
         jTextField1.setText("");
         jPasswordField1.setText("");
@@ -229,6 +229,8 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        nodoRed.salir();
+        nodoRed.stop();
         System.exit(0);
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -249,8 +251,7 @@ public class Login extends javax.swing.JFrame {
                 hashtext = "0" + hashtext;
             }
             return hashtext;
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }

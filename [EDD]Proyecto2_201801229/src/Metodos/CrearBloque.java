@@ -54,7 +54,6 @@ public class CrearBloque {
     public void eliminarUsuario(Usuario nuevo){
         eliminarUsuario += "{\n";
         eliminarUsuario += "\"Carnet\": " +nuevo.getCarnet() +",\n";
-        eliminarUsuario += "\"Password\": \"" +nuevo.getPassword() +"\",\n";
         eliminarUsuario += "},\n";
     }
     public void crearLibro(Libro nuevo){
@@ -81,13 +80,13 @@ public class CrearBloque {
     public void crearCategoria(AVLNode nuevo){
         crearCategoria += "{\n";
         crearCategoria += "\"Nombre\": \""+nuevo.getCategoria()+"\",\n";
-        crearCategoria += "\"Carnet:\": "+nuevo.getCarnetUsuario()+",\n";
+        crearCategoria += "\"Carnet\": "+nuevo.getCarnetUsuario()+",\n";
         crearCategoria += "},\n";
     }
     public void eliminarCategoria(AVLNode nuevo){
         eliminarCategoria += "{\n";
         eliminarCategoria += "\"Nombre\": \""+nuevo.getCategoria()+"\",\n";
-        eliminarCategoria += "\"Carnet:\": "+nuevo.getCarnetUsuario()+",\n";
+        eliminarCategoria += "\"Carnet\": "+nuevo.getCarnetUsuario()+",\n";
         eliminarCategoria += "},\n";
     }
     /**
