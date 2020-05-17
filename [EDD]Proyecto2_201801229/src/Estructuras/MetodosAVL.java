@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.indexBloque;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  *
@@ -393,7 +396,7 @@ public class MetodosAVL {
             //crea el flujo para escribir en el archivo
             flwriter = new FileWriter("ArbolAVL.txt");
             //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
-            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("ArbolAVL.txt"), "utf-8"));
             bfwriter.write(grafica);
             //cierra el buffer intermedio
             bfwriter.close();
@@ -457,7 +460,8 @@ public class MetodosAVL {
             //crea el flujo para escribir en el archivo
             flwriter = new FileWriter("ArbolB.txt");
             //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
-            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("ArbolB.txt"), "utf-8"));
+            
             bfwriter.write(grafica);
             //cierra el buffer intermedio
             bfwriter.close();

@@ -89,13 +89,13 @@ public class MetodosArbolB {
                 if (libro!=null) {
                     grafica+= "<td ><table cellspacing='0'>" +
                             "<tr><td>ISBN: "+libro.getISBN()+"</td></tr>" +
-                            "<tr><td>Titulo: "+libro.getTitulo().replaceAll(";", "").replaceAll("&", "&#38;")+"</td></tr>" +
-                            "<tr><td>Autor: "+libro.getAutor().replaceAll(";", "").replaceAll("&", "&#38;")+"</td></tr>" +
-                            "<tr><td>Editorail: "+libro.getEditorial().replaceAll(";", "").replaceAll("&", "&#38;")+"</td></tr>" +
+                            "<tr><td>Titulo: "+libro.getTitulo().replaceAll(";", "&#59;").replaceAll("&", "&#38;")+"</td></tr>" +
+                            "<tr><td>Autor: "+libro.getAutor().replaceAll(";", "&#59;").replaceAll("&", "&#38;")+"</td></tr>" +
+                            "<tr><td>Editorail: "+libro.getEditorial().replaceAll(";", "&#59;").replaceAll("&", "&#38;")+"</td></tr>" +
                             "<tr><td>Año: "+libro.getAño()+"</td></tr>" +
                             "<tr><td>Edicion: "+libro.getEdicion()+"</td></tr>" +
-                            "<tr><td>Categoria: "+libro.getCategoria().replaceAll(";", "").replaceAll("&", "&#38;")+"</td></tr>" +
-                            "<tr><td>Idioma: "+libro.getIdioma().replaceAll(";", "").replaceAll("&", "&#38;")+"</td></tr>" +
+                            "<tr><td>Categoria: "+libro.getCategoria().replaceAll(";", "&#59;").replaceAll("&", "&#38;")+"</td></tr>" +
+                            "<tr><td>Idioma: "+libro.getIdioma().replaceAll(";", "&#59;").replaceAll("&", "&#38;")+"</td></tr>" +
                             "<tr><td>Carnet Usuario: "+libro.getCarnetUsuario()+"</td></tr>" +
                             "</table></td>";
                     grafica+= "<td port='port_"+k+""+j+"'>H"+j+"</td>";

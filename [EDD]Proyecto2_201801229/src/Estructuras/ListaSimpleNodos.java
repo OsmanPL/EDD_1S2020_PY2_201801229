@@ -9,9 +9,15 @@ import Clases.*;
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -78,7 +84,7 @@ public class ListaSimpleNodos {
             //crea el flujo para escribir en el archivo
             flwriter = new FileWriter("Nodos.txt");
             //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
-            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Nodos.txt"), "utf-8"));;
             bfwriter.write(grafica);
             //cierra el buffer intermedio
             bfwriter.close();
@@ -118,13 +124,19 @@ public class ListaSimpleNodos {
 
     public String graficar() {
         String grafica = "digraph ListaNodos{\nrankdir=\"LR\";\nnode[shape=rect];\n";
-        NodoRed aux = inicio;
-        while (aux != null) {
-            grafica += "node" + aux.getPuerto() + "[label=\"Socket: " + aux.getPuerto() + "\"];\n";
-            if (aux.getSiguiente() != null) {
-                grafica += "node" + aux.getPuerto() + " -> node" + aux.getSiguiente().getPuerto() + ";\n";
+        try {
+
+            NodoRed aux = inicio;
+            InetAddress ip = InetAddress.getLocalHost();
+            while (aux != null) {
+                grafica += "node" + aux.getPuerto() + "[label=\"IP: " + ip.getHostAddress() + "\nSocket: " + aux.getPuerto() + "\"];\n";
+                if (aux.getSiguiente() != null) {
+                    grafica += "node" + aux.getPuerto() + " -> node" + aux.getSiguiente().getPuerto() + ";\n";
+                }
+                aux = aux.getSiguiente();
             }
-            aux = aux.getSiguiente();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(ListaSimpleNodos.class.getName()).log(Level.SEVERE, null, ex);
         }
         grafica += "}";
         return grafica;

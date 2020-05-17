@@ -23,6 +23,8 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  *
@@ -133,7 +135,7 @@ public class MetodosTablaHash {
             //crea el flujo para escribir en el archivo
             flwriter = new FileWriter("TablaHash.txt");
             //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
-            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("TablaHash.txt"), "utf-8"));
             bfwriter.write(grafica);
             //cierra el buffer intermedio
             bfwriter.close();

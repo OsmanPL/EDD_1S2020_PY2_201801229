@@ -10,8 +10,10 @@ import static edd.proyecto2_201801229.EDDProyecto2_201801229.indexBloque;
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -128,7 +130,7 @@ public class ListaDobleBloques {
             //crea el flujo para escribir en el archivo
             flwriter = new FileWriter("Bloques.txt");
             //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
-            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Bloques.txt"), "utf-8"));
             bfwriter.write(grafica);
             //cierra el buffer intermedio
             bfwriter.close();
