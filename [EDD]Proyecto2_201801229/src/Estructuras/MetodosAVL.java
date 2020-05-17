@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.indexBloque;
+import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 
@@ -27,6 +28,7 @@ public class MetodosAVL {
     AVLNode raiz;
     ArrayList<Integer> isbn = new ArrayList<Integer>();
     boolean s = true;
+    AVLNode ultimo;
 
     public void insert(String categoria, int carnet) {
         raiz = insertar(raiz, categoria, carnet);
@@ -277,6 +279,15 @@ public class MetodosAVL {
     public void eliminar(String categoria, int carnet) {
         s = true;
         raiz = delete(raiz, categoria, carnet);
+        if (!s) {
+            JOptionPane.showMessageDialog(null,
+                    "Se elimino la categoria",
+                    "Eliminar Categoria", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "La Categoria no existe o no te pertenece",
+                    "Eliminar Categoria", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public AVLNode delete(AVLNode root, String categoria, int carnet) {
@@ -461,7 +472,7 @@ public class MetodosAVL {
             flwriter = new FileWriter("ArbolB.txt");
             //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
             BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("ArbolB.txt"), "utf-8"));
-            
+
             bfwriter.write(grafica);
             //cierra el buffer intermedio
             bfwriter.close();
@@ -498,5 +509,208 @@ public class MetodosAVL {
 
         }
 
+    }
+
+    public void GraficarPreorden() {
+        ultimo = null;
+        String grafica = "digraph Preorden{\nrankdir=\"LR\";\n";
+        grafica += preorden(raiz);
+        grafica += "}";
+
+        FileWriter flwriter = null;
+        try {
+            //crea el flujo para escribir en el archivo
+            flwriter = new FileWriter("Preorden.txt");
+            //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
+            BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Preorden.txt"), "utf-8"));
+
+            bfwriter.write(grafica);
+            //cierra el buffer intermedio
+            bfwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (flwriter != null) {
+                try {//cierra el flujo principal
+                    flwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        try {
+            ProcessBuilder pbuilder;
+            String direccionPng = "Preorden.png";
+            String direccionDot = "Preorden.txt";
+            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", direccionPng, direccionDot);
+            pbuilder.redirectErrorStream(true);
+            //Ejecuta el proceso
+            pbuilder.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            String direccionPng = "Preorden.png";
+            File objetofile = new File(direccionPng);
+            Desktop.getDesktop().open(objetofile);
+
+        } catch (IOException ex) {
+
+            System.out.println(ex);
+
+        }
+    }
+
+    public String preorden(AVLNode actual) {
+        String grafica = "";
+        if (actual != null) {
+            if (ultimo != null) {
+                grafica += ultimo.getCategoria() + " -> " + actual.getCategoria() + ";\n";
+            }
+            ultimo = actual;
+            if (actual.getHi() != null) {
+                grafica += preorden(actual.getHi());
+            }
+            if (actual.getHd() != null) {
+                grafica += preorden(actual.getHd());
+            }
+        }
+        return grafica;
+    }
+
+    public void GraficarInorden() {
+        ultimo = null;
+        String grafica = "digraph Inorden{\nrankdir=\"LR\";\n";
+        grafica += inorden(raiz);
+        grafica += "}";
+
+        FileWriter flwriter = null;
+        try {
+            //crea el flujo para escribir en el archivo
+            flwriter = new FileWriter("Inorden.txt");
+            //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
+            BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Inorden.txt"), "utf-8"));
+
+            bfwriter.write(grafica);
+            //cierra el buffer intermedio
+            bfwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (flwriter != null) {
+                try {//cierra el flujo principal
+                    flwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        try {
+            ProcessBuilder pbuilder;
+            String direccionPng = "Inorden.png";
+            String direccionDot = "Inorden.txt";
+            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", direccionPng, direccionDot);
+            pbuilder.redirectErrorStream(true);
+            //Ejecuta el proceso
+            pbuilder.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            String direccionPng = "Inorden.png";
+            File objetofile = new File(direccionPng);
+            Desktop.getDesktop().open(objetofile);
+
+        } catch (IOException ex) {
+
+            System.out.println(ex);
+
+        }
+    }
+
+    public String inorden(AVLNode actual) {
+        String grafica = "";
+        if (actual != null) {
+            if (actual.getHi() != null) {
+                grafica += inorden(actual.getHi());
+            }
+            if (ultimo != null) {
+                grafica += ultimo.getCategoria() + " -> " + actual.getCategoria() + ";\n";
+            }
+            ultimo = actual;
+            grafica += actual.getCategoria() + ";\n";
+
+            if (actual.getHd() != null) {
+                grafica += inorden(actual.getHd());
+            }
+        }
+        return grafica;
+    }
+
+    public void GraficarPostorden() {
+        ultimo = null;
+        String grafica = "digraph Postorden{\nrankdir=\"LR\";\n";
+        grafica += postorden(raiz);
+        grafica += "}";
+
+        FileWriter flwriter = null;
+        try {
+            //crea el flujo para escribir en el archivo
+            flwriter = new FileWriter("Postorden.txt");
+            //crea un buffer o flujo intermedio antes de escribir directamente en el archivo
+            BufferedWriter bfwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Postorden.txt"), "utf-8"));
+
+            bfwriter.write(grafica);
+            //cierra el buffer intermedio
+            bfwriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (flwriter != null) {
+                try {//cierra el flujo principal
+                    flwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        try {
+            ProcessBuilder pbuilder;
+            String direccionPng = "Postorden.png";
+            String direccionDot = "Postorden.txt";
+            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", direccionPng, direccionDot);
+            pbuilder.redirectErrorStream(true);
+            //Ejecuta el proceso
+            pbuilder.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            String direccionPng = "Postorden.png";
+            File objetofile = new File(direccionPng);
+            Desktop.getDesktop().open(objetofile);
+
+        } catch (IOException ex) {
+
+            System.out.println(ex);
+
+        }
+    }
+
+    public String postorden(AVLNode actual) {
+        String grafica = "";
+        if (actual != null) {
+            if (actual.getHi() != null) {
+                grafica += postorden(actual.getHi());
+            }
+            if (actual.getHd() != null) {
+                grafica += postorden(actual.getHd());
+            }
+            if (ultimo != null) {
+                grafica += ultimo.getCategoria() + " -> " + actual.getCategoria() + ";\n";
+            }
+            ultimo = actual;
+        }
+        return grafica;
     }
 }

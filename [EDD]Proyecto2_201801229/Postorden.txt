@@ -1,0 +1,12 @@
+digraph Postorden{
+rankdir="LR";
+Biografia -> Drama;
+Drama -> Epico;
+Epico -> Ensayo;
+Ensayo -> Consulta;
+Consulta -> Literatura;
+Literatura -> Sagas;
+Sagas -> Revista;
+Revista -> Lírico;
+Lírico -> Informativos;
+}

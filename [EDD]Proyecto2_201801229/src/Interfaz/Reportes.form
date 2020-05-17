@@ -55,12 +55,15 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="8">
                 <StringItem index="0" value="Arbol AVL: Categorias"/>
                 <StringItem index="1" value="Arbol B: Libros"/>
                 <StringItem index="2" value="Tabla Hash: Usuarios"/>
                 <StringItem index="3" value="Lista Simple: Nodos"/>
                 <StringItem index="4" value="Lista Doble: Bloques"/>
+                <StringItem index="5" value="Recorrido Preorden: Categorias"/>
+                <StringItem index="6" value="Recorrido Inorden: Categorias"/>
+                <StringItem index="7" value="Recorrido Postorden: Categorias"/>
               </StringArray>
             </Property>
           </Properties>

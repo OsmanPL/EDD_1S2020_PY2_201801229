@@ -78,7 +78,7 @@ public class Reportes extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Arbol AVL: Categorias", "Arbol B: Libros", "Tabla Hash: Usuarios", "Lista Simple: Nodos", "Lista Doble: Bloques" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Arbol AVL: Categorias", "Arbol B: Libros", "Tabla Hash: Usuarios", "Lista Simple: Nodos", "Lista Doble: Bloques", "Recorrido Preorden: Categorias", "Recorrido Inorden: Categorias", "Recorrido Postorden: Categorias" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
@@ -181,6 +181,21 @@ public class Reportes extends javax.swing.JFrame {
             } else if (categoria.equals("Lista Doble: Bloques")) {
                 bloques.iniciarGrafica();
                 Image img = new ImageIcon("Bloques.png").getImage();
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                jLabel3.setIcon(img2);
+            } else if (categoria.equals("Recorrido Preorden: Categorias")) {
+                mavl.GraficarPreorden();
+                Image img = new ImageIcon("Preorden.png").getImage();
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                jLabel3.setIcon(img2);
+            }else if (categoria.equals("Recorrido Inorden: Categorias")) {
+                mavl.GraficarInorden();
+                Image img = new ImageIcon("Inorden.png").getImage();
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                jLabel3.setIcon(img2);
+            }else if (categoria.equals("Recorrido Postorden: Categorias")) {
+                mavl.GraficarPostorden();
+                Image img = new ImageIcon("Postorden.png").getImage();
                 ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
                 jLabel3.setIcon(img2);
             }

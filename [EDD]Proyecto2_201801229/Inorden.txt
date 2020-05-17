@@ -1,0 +1,22 @@
+digraph Inorden{
+rankdir="LR";
+Biografia;
+Biografia -> Consulta;
+Consulta;
+Consulta -> Drama;
+Drama;
+Drama -> Ensayo;
+Ensayo;
+Ensayo -> Epico;
+Epico;
+Epico -> Informativos;
+Informativos;
+Informativos -> Literatura;
+Literatura;
+Literatura -> Lírico;
+Lírico;
+Lírico -> Revista;
+Revista;
+Revista -> Sagas;
+Sagas;
+}

@@ -13,6 +13,7 @@ import Interfaz.*;
 import Metodos.*;
 import java.io.File;
 import java.sql.Timestamp;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,15 +31,23 @@ public class EDDProyecto2_201801229 {
     public static Nodo nodoRed;
     public static int indexBloque = 0;
     public static CrearBloque cb = new CrearBloque();
+
     public static void main(String[] args) {
-        calularIndex();
-        nodoRed = new Nodo();
-        nodoRed.start();
-        NodoRed nodo = new NodoRed();
-        nodo.setPuerto(nodoRed.getSocketUDP().getLocalPort());
-        red.insertar(nodo);
-        Login login = new Login();
-        login.setVisible(true);
+        try {
+            calularIndex();
+            nodoRed = new Nodo();
+            nodoRed.start();
+            NodoRed nodo = new NodoRed();
+            nodo.setPuerto(nodoRed.getSocketUDP().getLocalPort());
+            red.insertar(nodo);
+            Login login = new Login();
+            login.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Error: " + ex,
+                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 
     public static void calularIndex() {
@@ -54,11 +63,11 @@ public class EDDProyecto2_201801229 {
                 for (int i = 0; i < listado.length; i++) {
                     System.out.println(listado[i]);
                     LecturaArchivos la = new LecturaArchivos();
-                    la.leerBloque("Bloques/"+listado[i]);
-                    indexBloque = i+1;
+                    la.leerBloque("Bloques/" + listado[i]);
+                    indexBloque = i + 1;
                 }
-                
-                System.out.println("Siguiente Bloque: "+ indexBloque);
+
+                System.out.println("Siguiente Bloque: " + indexBloque);
             }
         } else {
             System.out.println("No Existe");

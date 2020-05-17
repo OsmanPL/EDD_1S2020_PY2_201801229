@@ -197,10 +197,7 @@ public class Categorias extends javax.swing.JFrame {
         // TODO add your handling code here:
         String categoria = jComboBox1.getSelectedItem().toString();
         mavl.eliminar(categoria, usuarioActual.getCarnet());
-        JOptionPane.showMessageDialog(null,
-                "Se elimino la categoria",
-                "Eliminar Categoria", JOptionPane.INFORMATION_MESSAGE);
-        libros = mavl.devolverArbol();
+        
 
         cargaDeDatos();
         cargaItem();
