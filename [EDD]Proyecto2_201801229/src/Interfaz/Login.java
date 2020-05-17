@@ -22,6 +22,8 @@ import static edd.proyecto2_201801229.EDDProyecto2_201801229.red;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.nodoRed;
 import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -38,7 +40,13 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        jLabel3.setText("IP: " + nodoRed.getDireccion());
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            jLabel3.setText("IP: " + ip.getHostAddress());
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         jLabel4.setText("Socket: " + nodoRed.getSocketUDP().getLocalPort());
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
