@@ -282,9 +282,6 @@ public class MetodosAVL {
         s = true;
         raiz = delete(raiz, categoria, carnet);
         if (!s) {
-            JOptionPane.showMessageDialog(null,
-                    "Se elimino la categoria",
-                    "Eliminar Categoria", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null,
                     "La Categoria no existe o no te pertenece",

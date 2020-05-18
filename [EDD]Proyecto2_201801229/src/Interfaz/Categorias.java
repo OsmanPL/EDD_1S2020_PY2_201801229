@@ -43,10 +43,10 @@ public class Categorias extends javax.swing.JFrame {
         model = new DefaultTableModel();
         model.addColumn("Categoria");
         model.addColumn("Libros");
-
+        model.addColumn("Carnet");
         for (AVLNode libro : libros) {
             if (libro != null) {
-                Object[] dato = new Object[]{libro.getCategoria(), libro.getArbolB().getArbolB().size()};
+                Object[] dato = new Object[]{libro.getCategoria(), libro.getArbolB().getArbolB().size(), libro.getCarnetUsuario()};
                 model.addRow(dato);
             }
         }
