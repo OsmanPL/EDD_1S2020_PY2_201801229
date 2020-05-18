@@ -157,14 +157,9 @@ public class ListaDobleBloques {
             e.printStackTrace();
         }
         try {
-            String direccionPng = "Bloques.png";
-            File objetofile = new File(direccionPng);
-            Desktop.getDesktop().open(objetofile);
-
-        } catch (IOException ex) {
-
-            System.out.println(ex);
-
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -174,7 +169,7 @@ public class ListaDobleBloques {
         while (aux != null) {
             grafica += "node" + aux.getIndex() + "[label=\"Index: " + aux.getIndex() + "\nTimestamp: " + aux.getTimestamp()
                     + "\nNONCE: " + aux.getNONCE() + "\nPreoviousHash: " + aux.getPrevioushash() + "\nHash: " + aux.getHash() + "\"];\n";
-            if (aux.getAnterior() != null && aux.getAnterior().getIndex()!= aux.getIndex()) {
+            if (aux.getAnterior() != null && aux.getAnterior().getIndex() != aux.getIndex()) {
                 grafica += "node" + aux.getIndex() + " -> node" + aux.getAnterior().getIndex() + ";\n";
                 grafica += "node" + aux.getAnterior().getIndex() + " -> node" + aux.getIndex() + ";\n";
             }

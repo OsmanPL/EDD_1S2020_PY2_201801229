@@ -25,6 +25,8 @@ import javax.crypto.spec.SecretKeySpec;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.cb;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -161,15 +163,10 @@ public class MetodosTablaHash {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try {
-            String direccionPng = "TablaHash.png";
-            File objetofile = new File(direccionPng);
-            Desktop.getDesktop().open(objetofile);
-
-        } catch (IOException ex) {
-
-            System.out.println(ex);
-
+         try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -17,7 +17,9 @@ import static edd.proyecto2_201801229.EDDProyecto2_201801229.nodoRed;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -64,6 +66,7 @@ public class Reportes extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -89,7 +92,7 @@ public class Reportes extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 180, -1));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 180, -1));
 
         jButton2.setText("Generar Reporte");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -97,28 +100,31 @@ public class Reportes extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 120, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, 120, 40));
 
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 180, -1));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 180, -1));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Categoria:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 70, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 70, -1));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Reporte:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 70, -1));
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 660, 350));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 70, -1));
+
+        jScrollPane1.setViewportView(jLabel3);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1060, 540));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
 
         pack();
@@ -156,13 +162,15 @@ public class Reportes extends javax.swing.JFrame {
             if (categoria.equals("Arbol AVL: Categorias")) {
                 mavl.graficarArbol();
                 Image img = new ImageIcon("ArbolAVL.png").getImage();
-                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(img.getWidth(rootPane), img.getHeight(rootPane), Image.SCALE_SMOOTH));
+                jScrollPane1.setViewportView(new JLabel(img2));
                 jLabel3.setIcon(img2);
             } else if (categoria.equals("Tabla Hash: Usuarios")) {
                 tablaHash.graficar();
                 Image img = new ImageIcon("TablaHash.png").getImage();
-                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(img.getWidth(rootPane), img.getHeight(rootPane), Image.SCALE_SMOOTH));
                 jLabel3.setIcon(img2);
+                jScrollPane1.setViewportView(new JLabel(img2));
             } else if (categoria.equals("Arbol B: Libros")) {
                 String cat = "";
                 cat = jComboBox2.getSelectedItem().toString();
@@ -170,34 +178,40 @@ public class Reportes extends javax.swing.JFrame {
                 if (ca != null) {
                     mavl.graficarArbolB(ca);
                     Image img = new ImageIcon("ArbolB.png").getImage();
-                    ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                    ImageIcon img2 = new ImageIcon(img.getScaledInstance(img.getWidth(rootPane), img.getHeight(rootPane), Image.SCALE_SMOOTH));
                     jLabel3.setIcon(img2);
+                    jScrollPane1.setViewportView(new JLabel(img2));
                 }
             } else if (categoria.equals("Lista Simple: Nodos")) {
                 red.iniciarGrafica();
                 Image img = new ImageIcon("Nodos.png").getImage();
-                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(img.getWidth(rootPane), img.getHeight(rootPane), Image.SCALE_SMOOTH));
                 jLabel3.setIcon(img2);
+                jScrollPane1.setViewportView(new JLabel(img2));
             } else if (categoria.equals("Lista Doble: Bloques")) {
                 bloques.iniciarGrafica();
                 Image img = new ImageIcon("Bloques.png").getImage();
-                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(img.getWidth(rootPane), img.getHeight(rootPane), Image.SCALE_SMOOTH));
                 jLabel3.setIcon(img2);
+                jScrollPane1.setViewportView(new JLabel(img2));
             } else if (categoria.equals("Recorrido Preorden: Categorias")) {
                 mavl.GraficarPreorden();
                 Image img = new ImageIcon("Preorden.png").getImage();
-                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(img.getWidth(rootPane), img.getHeight(rootPane), Image.SCALE_SMOOTH));
                 jLabel3.setIcon(img2);
+                jScrollPane1.setViewportView(new JLabel(img2));
             }else if (categoria.equals("Recorrido Inorden: Categorias")) {
                 mavl.GraficarInorden();
                 Image img = new ImageIcon("Inorden.png").getImage();
-                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(img.getWidth(rootPane), img.getHeight(rootPane), Image.SCALE_SMOOTH));
                 jLabel3.setIcon(img2);
+                jScrollPane1.setViewportView(new JLabel(img2));
             }else if (categoria.equals("Recorrido Postorden: Categorias")) {
                 mavl.GraficarPostorden();
                 Image img = new ImageIcon("Postorden.png").getImage();
-                ImageIcon img2 = new ImageIcon(img.getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_SMOOTH));
+                ImageIcon img2 = new ImageIcon(img.getScaledInstance(img.getWidth(rootPane), img.getHeight(rootPane), Image.SCALE_SMOOTH));
                 jLabel3.setIcon(img2);
+                jScrollPane1.setViewportView(new JLabel(img2));
             }
 
             //Tabla Hash: Usuarios
@@ -222,5 +236,6 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,12 +23,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="734" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="1095" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" pref="515" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="1" pref="689" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -73,7 +73,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="120" y="40" width="180" height="-1"/>
+              <AbsoluteConstraints x="430" y="30" width="180" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -86,7 +86,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="320" y="60" width="120" height="40"/>
+              <AbsoluteConstraints x="630" y="50" width="120" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -98,7 +98,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="120" y="100" width="180" height="-1"/>
+              <AbsoluteConstraints x="430" y="90" width="180" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -109,7 +109,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="40" y="100" width="70" height="-1"/>
+              <AbsoluteConstraints x="350" y="90" width="70" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -120,17 +120,23 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="40" y="40" width="70" height="-1"/>
+              <AbsoluteConstraints x="350" y="30" width="70" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="40" y="150" width="660" height="350"/>
+              <AbsoluteConstraints x="20" y="140" width="1060" height="540"/>
             </Constraint>
           </Constraints>
-        </Component>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

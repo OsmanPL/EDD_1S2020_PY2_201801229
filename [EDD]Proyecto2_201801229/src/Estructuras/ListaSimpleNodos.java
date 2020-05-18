@@ -111,14 +111,9 @@ public class ListaSimpleNodos {
             e.printStackTrace();
         }
         try {
-            String direccionPng = "Nodos.png";
-            File objetofile = new File(direccionPng);
-            Desktop.getDesktop().open(objetofile);
-
-        } catch (IOException ex) {
-
-            System.out.println(ex);
-
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

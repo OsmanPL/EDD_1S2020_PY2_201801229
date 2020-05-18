@@ -18,6 +18,8 @@ import static edd.proyecto2_201801229.EDDProyecto2_201801229.indexBloque;
 import static edd.proyecto2_201801229.EDDProyecto2_201801229.mavl;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -434,14 +436,9 @@ public class MetodosAVL {
             e.printStackTrace();
         }
         try {
-            String direccionPng = "ArbolAVL.png";
-            File objetofile = new File(direccionPng);
-            Desktop.getDesktop().open(objetofile);
-
-        } catch (IOException ex) {
-
-            System.out.println(ex);
-
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -499,16 +496,10 @@ public class MetodosAVL {
             e.printStackTrace();
         }
         try {
-            String direccionPng = "ArbolB.png";
-            File objetofile = new File(direccionPng);
-            Desktop.getDesktop().open(objetofile);
-
-        } catch (IOException ex) {
-
-            System.out.println(ex);
-
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public void GraficarPreorden() {
@@ -550,14 +541,9 @@ public class MetodosAVL {
             e.printStackTrace();
         }
         try {
-            String direccionPng = "Preorden.png";
-            File objetofile = new File(direccionPng);
-            Desktop.getDesktop().open(objetofile);
-
-        } catch (IOException ex) {
-
-            System.out.println(ex);
-
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -617,14 +603,9 @@ public class MetodosAVL {
             e.printStackTrace();
         }
         try {
-            String direccionPng = "Inorden.png";
-            File objetofile = new File(direccionPng);
-            Desktop.getDesktop().open(objetofile);
-
-        } catch (IOException ex) {
-
-            System.out.println(ex);
-
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -686,14 +667,9 @@ public class MetodosAVL {
             e.printStackTrace();
         }
         try {
-            String direccionPng = "Postorden.png";
-            File objetofile = new File(direccionPng);
-            Desktop.getDesktop().open(objetofile);
-
-        } catch (IOException ex) {
-
-            System.out.println(ex);
-
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ListaDobleBloques.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
